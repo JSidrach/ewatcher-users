@@ -1,7 +1,4 @@
 <?php
-  // Settings
-  require_once('settings.php');
-
   // Create an user, asign feeds and inputs
   //
   // Parameters:
@@ -11,45 +8,77 @@
   //   $panelType: type of the panel ("PV" or "Consumption")
   //
   // Returns
-  //   true: successfully created the user valid
+  //   true: user, feeds and inputs successfully created
   //   *anything else*: error string
   function create_linked_user($username, $email, $password, $panelType) {
-    // Validate input
-    $ret = validate_input($username, $email, $password, $panelType);
+    // Connect to the DB
+    $ret = create_connection($connection);
     if($ret !== true) {
       return $ret;
     }
+
+    // Validate input
+    $ret = validate_input($username, $email, $password, $panelType);
+    if($ret !== true) {
+      $connection->close();
+      return $ret;
+    }
+
     // Create user
-    $ret = create_user($username, $email, $password, $userid = false);
-    if($ret === false) {
+    if(create_user($username, $email, $password, $userid, $connection) !== true) {
+      $connection->close();
       return 'El nombre de usuario ya existe';
     }
+
     // Create feeds&inputs
     // PV
     if($panelType == 'PV') {
       // Feeds
-      $ret = create_feeds_pv($userid, $feeds = false);
-      if($ret === false) {
+      if(create_feeds_pv($userid, $feeds, $connection) !== true) {
+        $connection->close();
         return 'Fallo al crear los feeds';
       }
+
       // Inputs
-      $ret = create_inputs_pv($userid, $feeds);
-      if($ret === false) {
+      if(create_inputs_pv($userid, $feeds, $connection) !== true) {
+        $connection->close();
         return 'Fallo al crear los inputs';
       }
     }
+
     // Consumption
     else if($panelType == 'Consumption') {
       // Feeds
-      $ret = create_feeds_consumption($userid, $feeds = false);
-      if($ret === false) {
+      if(create_feeds_consumption($userid, $feeds, $connection) !== true) {
+        $connection->close();
         return 'Fallo al crear los feeds';
       }
+
       // Inputs
-      $ret = create_inputs_consumption($userid, $feeds);
-      if($ret === false) {
+      if(create_inputs_consumption($userid, $feeds, $connection) !== true) {
+        $connection->close();
         return 'Fallo al crear los inputs';
       }
+    }
+
+    return true;
+  }
+
+  // Create a connection with the database
+  //
+  // Parameters:
+  //   $connection: output parameter, connection
+  //
+  // Returns
+  //   true: connection successfully created
+  //   *anything else*: error string
+  function create_connection(&$connection) {
+    // Get DB settings
+    require_once('settings.php');
+
+    $connection = new mysqli($db_server, $db_username, $db_password, $db_name);
+    if($connection->connect_error) {
+      return true;
     }
     return true;
   }
@@ -67,7 +96,8 @@
   //   *anything else*: error string
   function validate_input($username, $email, $password, $panelType) {
     // Username
-    if((!isset($username)) || (strlen($username == 0))) {
+    if((!isset($username)) || (strlen($username) == 0)) {
+      echo $username;
       return 'Introduzca un nombre de usuario';
     }
     if(!ctype_alnum($username)) {
@@ -81,7 +111,7 @@
     }
 
     // Email
-    if((!isset($email)) || (strlen($email == 0))) {
+    if((!isset($email)) || (strlen($email) == 0)) {
       return 'Introduzca un email';
     }
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -89,7 +119,7 @@
     }
 
     // Password
-    if((!isset($password)) || (strlen($password == 0))) {
+    if((!isset($password)) || (strlen($password) == 0)) {
       return 'Introduzca una contraseña';
     }
     if(strlen($password) < 4) {
@@ -100,7 +130,7 @@
     }
 
     // Panel Type
-    if((!isset($panelType)) || (strlen($panelType == 0))) {
+    if((!isset($panelType)) || (strlen($panelType) == 0)) {
       return 'Seleccione un tipo de instalación';
     }
     if(!($panelType === 'PV' || $panelType === 'Consumption')) {
@@ -116,11 +146,12 @@
   //   $email: email of the user
   //   $password: password of the user
   //   $userid: output parameter, id of the user created
+  //   $connection: connection with the database
   //
   // Returns
-  //   true: user create successfully
+  //   true: user successfully created
   //   false: error creating the user (already exists)
-  function create_user($username, $email, $password, &$userid) {
+  function create_user($username, $email, $password, &$userid, $connection) {
     // TODO
     // Europe/Madrid | es_ES
     /*        // If we got here the username, password and email should all be valid
@@ -133,7 +164,7 @@
         if (!$this->mysqli->query("INSERT INTO users ( username, password, email, salt ,apikey_read, apikey_write, admin ) VALUES ( '$username' , '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0 );")) {
             return array('success'=>false, 'message'=>_("Error creating user"));
         }*/
-    return 1;
+    return true;
   }
 
   // Create the PV feeds
@@ -141,11 +172,12 @@
   // Parameters:
   //   $userid: id of the user
   //   $feeds: output parameter for the feeds, in the format 'feedName'=>'feedID'
+  //   $connection: connection with the database
   //
   // Returns
-  //   true: feeds created successfully
+  //   true: feeds successfully created
   //   false: error creating the feeds
-  function create_feeds_pv($userid, &$feeds) {
+  function create_feeds_pv($userid, &$feeds, $connection) {
     // TODO
     return true;
   }
@@ -155,11 +187,12 @@
   // Parameters:
   //   $userid: id of the user
   //   $feeds: feeds id array, in the format 'feedName'=>'feedID'
+  //   $connection: connection with the database
   //
   // Returns
-  //   true: inputs created successfully
+  //   true: inputs successfully created
   //   false: error creating the inputs
-  function create_inputs_pv($userid, $feeds) {
+  function create_inputs_pv($userid, $feeds, $connection) {
     // TODO
     return true;
   }
@@ -169,11 +202,12 @@
   // Parameters:
   //   $userid: id of the user
   //   $feeds: output parameter for the feeds, in the format 'feedName'=>'feedID'
+  //   $connection: connection with the database
   //
   // Returns
-  //   true: feeds created successfully
+  //   true: feeds successfully created
   //   false: error creating the feeds
-  function create_feeds_consumption($userid, &$feeds) {
+  function create_feeds_consumption($userid, &$feeds, $connection) {
     // TODO
     return true;
   }
@@ -183,11 +217,12 @@
   // Parameters:
   //   $userid: id of the user
   //   $feeds: feeds id array, in the format 'feedName'=>'feedID'
+  //   $connection: connection with the database
   //
   // Returns
-  //   true: inputs created successfully
+  //   true: inputs successfully created
   //   false: error creating the inputs
-  function create_inputs_consumption($userid, $feeds) {
+  function create_inputs_consumption($userid, $feeds, $connection) {
     // TODO
     return true;
   }

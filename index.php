@@ -19,6 +19,7 @@
   <head>
     <meta charset="utf-8">
     <title>Creación de Usuarios - ISM Solar</title>
+    <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="lib/style.css">
     <link rel="stylesheet" type="text/css" href="lib/sweetalert.css">
     <script src="lib/sweetalert.min.js"></script>

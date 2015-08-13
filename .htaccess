@@ -2,3 +2,6 @@ AuthType Basic
 AuthName "Password Protected Area"
 AuthUserFile /var/www/html/creacion-usuarios/.htpasswd
 Require valid-user
+
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\info
