@@ -21,7 +21,7 @@ Sistema para crear, mediante el navegador, usuarios en la plataforma *emoncms*, 
 </Directory>
 ~~~~
 
-* Reiniciar apache ejecutando `sudo apachectl restart`
+* Reiniciar *Apache* ejecutando `sudo apachectl restart`
 
 ### Utilización
 Abrir en el navegador la dirección del servidor en el que se ha instalado el proyecto seguida de `/creacion-usuarios/`
