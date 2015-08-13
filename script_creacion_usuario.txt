@@ -1,0 +1,38 @@
+DECLARE @aux_id int;
+    
+INSERT INTO users (username, password, email, salt, apikey_read, apikey_write, admin ) 
+VALUES ('$username' , '$password', '$email', '$salt', '$apikey_read', '$apikey_write', 0 );
+
+SET @aux_id = (SELECT id FROM users WHERE username = '$username' AND password = '$password');
+
+-- Inputs
+INSERT into input (userid, name, description, nodeid, time) VALUES (@aux_id, 'ipv','Intensidad fotovoltaica','',current_timestamp);
+INSERT into input (userid, name, description, nodeid, time) VALUES (@aux_id, 'ppvm','Potencia FV medida','',current_timestamp);
+INSERT into input (userid, name, description, nodeid, time) VALUES (@aux_id, 'iload','Corriente consumo','',current_timestamp);
+INSERT into input (userid, name, description, nodeid, time) VALUES (@aux_id, 'pload','Potencia consumo','',current_timestamp);
+INSERT into input (userid, name, description, nodeid, time) VALUES (@aux_id, 'voltaje','Voltaje','',current_timestamp);
+
+-- Feeds
+-- Sin engine ni processList con datatype 1
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Potencia FV medida',@aux_id,'Node:','1','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Potencia FV a cosumo',@aux_id,'Node:','1','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Potencia Red a consumo', @aux_id, 'Node:', '1','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Porcentaje de consumo con FV instantaneo', @aux_id, 'Node:', '1','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Porcentaje de consumo de Red instantaneo',@aux_id,'Node:', '1','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Potencia FV a Red',@aux_id,'Node:','1','0','', );
+
+-- Sin engine ni processList con datatype 2
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia fotovoltaica diaria',@aux_id,'Node:','2','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia diaria de la red',@aux_id,'Node:','2','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Consumo diario', @aux_id, 'Node:', '2','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia FV a red diaria', @aux_id, 'Node:', '2','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Porcentaje de autoconsumo diario',@aux_id,'Node:', '2','0','',  );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Porcentaje diario de consumo de origen FV',@aux_id,'Node:', '2','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia consumo diario de FV',@aux_id,'Node:', '2','0','', );
+
+-- Sin engine ni processList ni datatype
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Consumo total',@aux_id,'Node:','','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia FV generada total',@aux_id,'Node:','','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia total importada de la red', @aux_id, 'Node:', '','0','',   );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia FV a consumo total', @aux_id, 'Node:', '','0','', );
+INSERT INTO feeds(name,userid,tag,datatype,public,engine, processList) VALUES ('Energia FV inyectada a red total',@aux_id,'Node:', '','0','',  );
