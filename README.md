@@ -1,5 +1,5 @@
 # Creación Automática de Usuarios
-Sistema para crear mediante el navegador usuarios y asignarle automáticamente alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
+Sistema para crear, mediante el navegador, usuarios en la plataforma *emoncms*, asignándoles automáticamente alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
 
 ### Instalación y Configuración
 * **NOTA**: es necesario haber instalado *emoncms* previamente
@@ -12,6 +12,7 @@ Sistema para crear mediante el navegador usuarios y asignarle automáticamente a
 * Las credenciales por defecto para acceder a la página son `admin/admin`
 * Para cambiar la contraseña de acceso, editar el archivo `.htpasswd` reemplazando la línea por una generada, por ejemplo, [aquí](http://www.htaccesstools.com/htpasswd-generator/)
 * Editar el archivo `/etc/apache2/apache2.conf`, quedando la parte del directorio web así:
+
     ```
     <Directory /var/www/html>
             Options Indexes FollowSymLinks
@@ -30,6 +31,7 @@ Abrir en el navegador la dirección del servidor en el que se ha instalado el pr
 
 ### Librerías externas
 Se utilizan las siguientes librerías de terceros:
+
 * [SweetAlert](http://t4t5.github.io/sweetalert/): notificaciones
 * [registration-form](http://www.cssflow.com/snippets/registration-form): estilo del formulario
 
