@@ -13,13 +13,14 @@ Sistema para crear, mediante el navegador, usuarios en la plataforma *emoncms*, 
 * Para cambiar la contraseña de acceso, editar el archivo `.htpasswd` reemplazando la línea por una generada, por ejemplo, [aquí](http://www.htaccesstools.com/htpasswd-generator/)
 * Editar el archivo `/etc/apache2/apache2.conf`, quedando la parte del directorio web así:
 
-    ```
-    <Directory /var/www/html>
-            Options Indexes FollowSymLinks
-            AllowOverride All
-            Require all granted
-    </Directory>
-    ```
+~~~~
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+~~~~
+
 * Reiniciar apache ejecutando `sudo apachectl restart`
 
 ### Utilización
