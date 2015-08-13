@@ -5,3 +5,4 @@ Require valid-user
 
 RedirectMatch 404 /\.git
 RedirectMatch 404 /\info
+RedirectMatch 404 README.md
