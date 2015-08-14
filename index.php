@@ -1,4 +1,9 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
   // Form not submitted yet
   if (!isset($_POST['submitForm'])){
     $result = false;

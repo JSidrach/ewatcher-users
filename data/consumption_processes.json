@@ -1,0 +1,25 @@
+[
+  {
+    "input": "nombre del input, por ej, ipv",
+    "processes": [
+      {
+        "function": "nombre de la funcion (ver defs_emoncms.php)",
+        "arguments": [
+          {
+            "type": "feed/input/value",
+            "value": "nombre del feed/input, valor (sin comillas si es valor)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "input": "nombre del input, por ej, ipv",
+    "processes": [
+      {
+        "function": "nombre de la funcion (ver defs_emoncms.php)",
+        "arguments": []
+      }
+    ]
+  }
+]

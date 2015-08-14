@@ -1,0 +1,22 @@
+[
+  {
+    "name": "ipv",
+    "description": "Intensidad fotovoltaica"
+  },
+  {
+    "name": "ppvm",
+    "description": "Potencia fotovoltaica medida"
+  },
+  {
+    "name": "iload",
+    "description": "Corriente consumo"
+  },
+  {
+    "name": "pload",
+    "description": "Potencia consumo"
+  },
+  {
+    "name": "voltage",
+    "description": "Voltaje"
+  }
+]

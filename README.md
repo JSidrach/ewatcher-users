@@ -37,5 +37,5 @@ Se utilizan las siguientes librerías de terceros:
 * [registration-form](http://www.cssflow.com/snippets/registration-form): estilo del formulario
 
 ### Tareas pendientes
-* Funciones en query.php del perfil Autoconsumo FV
-* Funciones en query.php del perfil Consumo Eléctrico
+* Funciones en query.php de consultas a partir de los datos
+* Documentar funcionamiento del subproyecto

@@ -1,4 +1,7 @@
 <?php
+  // Emoncms definitions
+  require_once('defs_emoncms.php');
+
   // Create an user, asign feeds and inputs
   //
   // Parameters:
@@ -30,35 +33,33 @@
       return 'El nombre de usuario ya existe';
     }
 
-    // Create feeds&inputs
+    // Set the type of user data
+    $prefix = 'data/';
     // PV
     if($panelType == 'PV') {
-      // Feeds
-      if(create_feeds_pv($userid, $feeds, $connection) !== true) {
-        $connection->close();
-        return 'Fallo al crear los feeds';
-      }
-
-      // Inputs
-      if(create_inputs_pv($userid, $feeds, $connection) !== true) {
-        $connection->close();
-        return 'Fallo al crear los inputs';
-      }
+      $prefix .= 'pv';
+    }
+    // Consumption
+    else {
+      $prefix .= 'consumption';
     }
 
-    // Consumption
-    else if($panelType == 'Consumption') {
-      // Feeds
-      if(create_feeds_consumption($userid, $feeds, $connection) !== true) {
-        $connection->close();
-        return 'Fallo al crear los feeds';
-      }
+    // Create feeds
+    if(create_feeds($prefix . '_feeds.json', $userid, $feeds, $connection) !== true) {
+      $connection->close();
+      return 'Fallo al crear los feeds';
+    }
 
-      // Inputs
-      if(create_inputs_consumption($userid, $feeds, $connection) !== true) {
-        $connection->close();
-        return 'Fallo al crear los inputs';
-      }
+    // Create inputs
+    if(create_inputs($prefix . '_inputs.json', $userid, $inputs, $connection) !== true) {
+      $connection->close();
+      return 'Fallo al crear los inputs';
+    }
+
+    // Create processes
+    if(create_processes($prefix . '_processes.json', $userid, $feeds, $inputs, $connection) !== true) {
+      $conncetion->close();
+      return 'Fallo al crear los procesos';
     }
 
     return true;
@@ -152,78 +153,101 @@
   //   true: user successfully created
   //   false: error creating the user (already exists)
   function create_user($username, $email, $password, &$userid, $connection) {
-    // TODO
-    // Europe/Madrid | es_ES
-    /*        // If we got here the username, password and email should all be valid
-        $hash = hash('sha256', $password);
-        $string = md5(uniqid(mt_rand(), true));
-        $salt = substr($string, 0, 3);
-        $hash = hash('sha256', $salt . $hash);
-        $apikey_write = md5(uniqid(mt_rand(), true));
-        $apikey_read = md5(uniqid(mt_rand(), true));
-        if (!$this->mysqli->query("INSERT INTO users ( username, password, email, salt ,apikey_read, apikey_write, admin ) VALUES ( '$username' , '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0 );")) {
-            return array('success'=>false, 'message'=>_("Error creating user"));
-        }*/
+    // Rest of the parameters
+    $hash = hash('sha256', $password);
+    $string = md5(uniqid(mt_rand(), true));
+    $salt = substr($string, 0, 3);
+    $hash = hash('sha256', $salt . $hash);
+    $apikey_write = md5(uniqid(mt_rand(), true));
+    $apikey_read = md5(uniqid(mt_rand(), true));
+    $timezone = 'Europe/Madrid';
+    $language = 'es_ES';
+
+    // Query
+    $sqlQuery = "INSERT INTO users (username, password, email, salt ,apikey_read, apikey_write, admin, timezone, language)
+                VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$timezone', '$language');";
+    if ($connection->query($sqlQuery) !== TRUE) {
+      return false;
+    }
+
+    // Asign userid
+    $userid = $connection->insert_id;
     return true;
   }
 
-  // Create the PV feeds
+  // Create the feeds
   //
   // Parameters:
+  //   $datafile: path to the feeds data
   //   $userid: id of the user
-  //   $feeds: output parameter for the feeds, in the format 'feedName'=>'feedID'
+  //   $feeds: output parameter for the feeds, in the format 'feedName'=>'feedId'
   //   $connection: connection with the database
   //
   // Returns
   //   true: feeds successfully created
   //   false: error creating the feeds
-  function create_feeds_pv($userid, &$feeds, $connection) {
-    // TODO
+  function create_feeds($datafile, $userid, &$feeds, $connection) {
+    // Read the feeds from file
+    $feedArray = json_decode(file_get_contents($datafile), true);
+
+    // Create each feed
+    foreach($feedArray as $feed) {
+      // TODO
+      // Make query
+      // Assign the created feed id to the feeds array
+    }
+
     return true;
   }
 
-  // Create the PV inputs
+  // Create the inputs
   //
   // Parameters:
+  //   $datafile: path to the inputs data
   //   $userid: id of the user
-  //   $feeds: feeds id array, in the format 'feedName'=>'feedID'
+  //   $inputs: output parameter for the inputs, in the format 'inputName'=>'inputId'
   //   $connection: connection with the database
   //
   // Returns
   //   true: inputs successfully created
   //   false: error creating the inputs
-  function create_inputs_pv($userid, $feeds, $connection) {
-    // TODO
+  function create_inputs($datafile, $userid, &$inputs, $connection) {
+    // Create the inputs from file
+    $inputArray = json_decode(file_get_contents($datafile), true);
+
+    // Create each input
+    foreach($inputArray as $input) {
+      // TODO
+      // Make query
+      // Assign the created input id to the feeds array
+    }
+
     return true;
   }
 
-  // Create the consumption feeds
+  // Create the processes
   //
   // Parameters:
+  //   $datafile: path to the processes data
   //   $userid: id of the user
-  //   $feeds: output parameter for the feeds, in the format 'feedName'=>'feedID'
+  //   $feeds: array of feed ids, in the format 'feedName'=>'feedId'
+  //   $inputs: array of input ids, in the format 'inputName'=>'inputId'
   //   $connection: connection with the database
   //
   // Returns
-  //   true: feeds successfully created
-  //   false: error creating the feeds
-  function create_feeds_consumption($userid, &$feeds, $connection) {
-    // TODO
-    return true;
-  }
+  //   true: processes successfully created
+  //   false: error creating the processes
+  function create_processes($datafile, $userid, $feeds, $inputs, $connection) {
+    // Read the processes from file
+    $processArray = json_decode(file_get_contents($datafile), true);
 
-  // Create the PV inputs
-  //
-  // Parameters:
-  //   $userid: id of the user
-  //   $feeds: feeds id array, in the format 'feedName'=>'feedID'
-  //   $connection: connection with the database
-  //
-  // Returns
-  //   true: inputs successfully created
-  //   false: error creating the inputs
-  function create_inputs_consumption($userid, $feeds, $connection) {
-    // TODO
+    // Create each process
+    foreach($processArray as $process) {
+      // TODO
+      // Translate process
+      // Make query
+    }
+
     return true;
   }
 ?>

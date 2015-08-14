@@ -1,0 +1,14 @@
+[
+  {
+    "name": "eDLoad",
+    "description": "Consumo diario",
+    "type": "DAILY",
+    "engine": "PHPTIMESERIES"
+  },
+  {
+    "name": "tLoad",
+    "description": "Consumo total",
+    "type": "REALTIME",
+    "engine": "PHPFINA"
+  }
+]

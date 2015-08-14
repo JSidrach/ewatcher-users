@@ -1,0 +1,14 @@
+[
+  {
+    "name": "iload",
+    "description": "Corriente consumo"
+  },
+  {
+    "name": "pload",
+    "description": "Potencia consumo"
+  },
+  {
+    "name": "voltage",
+    "description": "Voltaje"
+  }
+]

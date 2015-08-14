@@ -1,0 +1,110 @@
+[
+  {
+    "name": "ppv",
+    "description": "Potencia FV medida",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "iPvToLoad",
+    "description": "Potencia fotovoltaica a consumo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "iGridToLoad",
+    "description": "Potencia Red a consumo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "iPLoadFromPv",
+    "description": "Porcentaje de consumo con FV instantáneo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "iPLoadFromNet",
+    "description": "Porcentaje de consumo de red instantáneo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "iPvToNet",
+    "description": "Potencia FV a red",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "eDPv",
+    "description": "Energía fotovoltaica diaria",
+    "type": "DAILY",
+    "engine": "PHPTIMESERIES"
+  },
+  {
+    "name": "eDNet",
+    "description": "Energía diaria de la red",
+    "type": "DAILY",
+    "engine": "PHPTIMESERIES"
+  },
+  {
+    "name": "eDLoad",
+    "description": "Consumo diario",
+    "type": "DAILY",
+    "engine": "PHPTIMESERIES"
+  },
+  {
+    "name": "eDPvToNet",
+    "description": "Energía FV a red diaria",
+    "type": "DAILY",
+    "engine": "PHPTIMESERIES"
+  },
+  {
+    "name": "dPSelf",
+    "description": "Porcentaje de autoconsumo diario",
+    "type": "DAILY",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "dPLoadFromPv",
+    "description": "Porcentaje diario de consumo de origen FV",
+    "type": "DAILY",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "eDLoadFromPv",
+    "description": "Energía consumo diario de FV",
+    "type": "DAILY",
+    "engine": "PHPTIMESERIES"
+  },
+  {
+    "name": "tLoad",
+    "description": "Consumo total",
+    "type": "REALTIME",
+    "engine": "PHPFINA"
+  },
+  {
+    "name": "tPv",
+    "description": "Energía FV generada total",
+    "type": "REALTIME",
+    "engine": "PHPFINA"
+  },
+  {
+    "name": "tLoadFromNet",
+    "description": "Energía total importada de la red",
+    "type": "REALTIME",
+    "engine": "PHPFINA"
+  },
+  {
+    "name": "tPvToLoad",
+    "description": "Energía FV a consumo total",
+    "type": "REALTIME",
+    "engine": "PHPFINA"
+  },
+  {
+    "name": "tPvToNet",
+    "description": "Energía FV inyectada a red total",
+    "type": "REALTIME",
+    "engine": "PHPFINA"
+  }
+]
