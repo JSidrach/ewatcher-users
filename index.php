@@ -39,7 +39,7 @@
         }
       ?>
       >
-      <label for="P1" class="register-switch-label">FV</label>
+      <label for="P1" title="Autoconsumo Fotovoltaico" class="register-switch-label">FV</label>
       <input type="radio" name="panelType" value="Consumption" id="P2" class="register-switch-input"
       <?php
         if(isset($_REQUEST['panelType']) && $_REQUEST['panelType'] === 'Consumption') {
@@ -47,7 +47,7 @@
         }
       ?>
       >
-      <label for="P2" class="register-switch-label">Consumo</label>
+      <label for="P2" title="Consumo Eléctrico" class="register-switch-label">Consumo</label>
     </div>
     <input type="username" name="username" class="register-input" placeholder="Nombre del usuario" <?php if(isset($_REQUEST['username'])) echo 'value="' . $_REQUEST['username']. '"'; ?>>
     <input type="email" name="email" class="register-input" placeholder="Dirección de correo electrónico" <?php if(isset($_REQUEST['email'])) echo 'value="' . $_REQUEST['email']. '"'; ?>>
