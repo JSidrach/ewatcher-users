@@ -23,13 +23,13 @@
     // Validate input
     $ret = validate_input($username, $email, $password, $panelType);
     if($ret !== true) {
-      $connection->close();
+      end_connection($connection, true);
       return $ret;
     }
 
     // Create user
     if(create_user($username, $email, $password, $userid, $connection) !== true) {
-      $connection->close();
+      end_connection($connection, true);
       return 'El nombre de usuario ya existe';
     }
 
@@ -46,19 +46,19 @@
 
     // Create feeds
     if(create_feeds($prefix . '_feeds.json', $userid, $feeds, $connection) !== true) {
-      $connection->close();
+      end_connection($connection, true);
       return 'Fallo al crear los feeds';
     }
 
     // Create inputs
     if(create_inputs($prefix . '_inputs.json', $userid, $inputs, $connection) !== true) {
-      $connection->close();
+      end_connection($connection, true);
       return 'Fallo al crear los inputs';
     }
 
     // Create processes
     if(create_processes($prefix . '_processes.json', $userid, $feeds, $inputs, $connection) !== true) {
-      $conncetion->close();
+      end_connection($connection, true);
       return 'Fallo al crear los procesos';
     }
 
@@ -81,7 +81,26 @@
     if($connection->connect_error) {
       return true;
     }
+    // Disable autocommit (begin transaction)
+    $connection->autocommit(FALSE);
     return true;
+  }
+
+  // Ends the connection
+  //
+  // Parameters:
+  //   $error: if true, the changes will be rolled back, otherwise, they will be commited
+  //   $connection: connection to the database
+  function end_connection($error, &$connection) {
+    // Error, rollback changes
+    if($error === true) {
+      $connection->rollback();
+    }
+    // No error, commit the changes
+    else {
+      $connection->commit();
+    }
+    $connection->close();
   }
 
   // Validate the input
