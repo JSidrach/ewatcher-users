@@ -1,0 +1,56 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "string"
+      },
+      "processes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "function": {
+              "type": "string"
+            },
+            "arguments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "input",
+                      "feed",
+                      "value"
+                    ]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "value"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "function",
+            "arguments"
+          ]
+        }
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "input",
+      "processes"
+    ]
+  }
+}

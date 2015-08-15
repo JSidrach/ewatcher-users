@@ -1,0 +1,36 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "DAILY",
+          "REALTIME"
+        ]
+      },
+      "engine": {
+        "type": "string",
+        "enum": [
+          "PHPFIWA",
+          "PHPFINA",
+          "PHPTIMESERIES"
+        ]
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "name",
+      "description",
+      "type",
+      "engine"
+    ]
+  }
+}

@@ -30,6 +30,12 @@ Abrir en el navegador la dirección del servidor en el que se ha instalado el pr
 * Situarse en la carpeta `/var/www/html/creacion-usuarios/` y ejecutar `git pull`
 * Descartar los cambios locales en caso de haber discrepancias
 
+### Funcionalidad
+json schema validator
+* **index.php**:
+* **query.php**:
+* **defs_emoncms.php**:
+
 ### Librerías externas
 Se utilizan las siguientes librerías de terceros:
 
