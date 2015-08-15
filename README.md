@@ -35,7 +35,7 @@ Este sistema permite crear, usando el navegador, usuarios en la plataforma *emon
 Para ello, consta de los siguientes ficheros principales:
 
 * **index.php**: *front-end*, página web con un formulario para rellenar con los datos del usuario a crear
-* **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario.
+* **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario
 * **defs_emoncms.php**: definiciones auxiliares, dependientes de *emoncms*, sobre los números que se asignan a las funciones, los tipos de datos y los motores utilizados
 
 Adicionalmente, se guardan en la carpeta `data/` los archivos de definiciones de *feeds*, *inputs*, y *procesos* (conjunto de operaciones sobre cada *input*).
