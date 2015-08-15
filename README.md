@@ -31,10 +31,17 @@ Abrir en el navegador la dirección del servidor en el que se ha instalado el pr
 * Descartar los cambios locales en caso de haber discrepancias
 
 ### Funcionalidad
-json schema validator
-* **index.php**:
-* **query.php**:
-* **defs_emoncms.php**:
+Este sistema permite crear, usando el navegador, usuarios en la plataforma *emoncms*, asignándoles *feeds* e *inputs* según qué perfil se seleccione (Autoconsumo FV o Consumo Eléctrico).
+Para ello, consta de los siguientes ficheros principales:
+
+* **index.php**: *front-end*, página web con un formulario para rellenar con los datos del usuario a crear
+* **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario.
+* **defs_emoncms.php**: definiciones auxiliares, dependientes de *emoncms*, sobre los números que se asignan a las funciones, los tipos de datos y los motores utilizados
+
+Adicionalmente, se guardan en la carpeta `data/` los archivos de definiciones de *feeds*, *inputs*, y *procesos* (conjunto de operaciones sobre cada *input*).
+Estas definiciones están en formato *JSON*, y existen 3 (`_feeds.json`, `_inputs.json`, y `_processes.json`) para cada tipo de usuario (*pv* y *consumption*).
+También se han incluido los esquemas de cada uno de los 3 tipos de archivo, con el prefijo `_schema`.
+Se pueden validar las definiciones contra el esquema utilizando un *JSON Scheme Validator (v4)*, disponibles online.
 
 ### Librerías externas
 Se utilizan las siguientes librerías de terceros:
