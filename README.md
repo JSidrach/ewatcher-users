@@ -41,7 +41,7 @@ Para ello, consta de los siguientes ficheros principales:
 Adicionalmente, se guardan en la carpeta `data/` los archivos de definiciones de *feeds*, *inputs*, y *procesos* (conjunto de operaciones sobre cada *input*).
 Estas definiciones están en formato *JSON*, y existen 3 (`_feeds.json`, `_inputs.json`, y `_processes.json`) para cada tipo de usuario (*pv* y *consumption*).
 También se han incluido los esquemas de cada uno de los 3 tipos de archivo, con el prefijo `_schema`.
-Se pueden validar las definiciones contra el esquema utilizando un *JSON Scheme Validator (v4)*, disponibles online.
+Se pueden validar las definiciones contra el esquema utilizando un *JSON Scheme Validator (v4)*, disponible online.
 
 ### Librerías externas
 Se utilizan las siguientes librerías de terceros:
