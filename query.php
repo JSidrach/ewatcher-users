@@ -57,7 +57,7 @@
     }
 
     // Create processes
-    if(create_processes($prefix . '_processes.json', $userid, $feeds, $inputs, $connection) !== true) {
+    if(create_processes($prefix . '_processes.json', $feeds, $inputs, $connection) !== true) {
       end_connection($connection, true);
       return 'Fallo al crear los procesos';
     }
@@ -184,7 +184,7 @@
 
     // Query
     $sqlQuery = "INSERT INTO users (username, password, email, salt ,apikey_read, apikey_write, admin, timezone, language)
-                VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$timezone', '$language');";
+                 VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$timezone', '$language');";
     if ($connection->query($sqlQuery) !== TRUE) {
       return false;
     }
@@ -207,13 +207,20 @@
   //   false: error creating the feeds
   function create_feeds($datafile, $userid, &$feeds, $connection) {
     // Read the feeds from file
-    $feedArray = json_decode(file_get_contents($datafile), true);
+    $feedArray = json_decode(file_get_contents($datafile));
 
     // Create each feed
     foreach($feedArray as $feed) {
-      // TODO
-      // Make query
+      // Query
+      $datatype = get_type_id($feed->type);
+      $engine = get_engine_id($feed->engine);
+      $sqlQuery = "INSERT INTO feeds (userid, name, tag, datatype, public, engine)
+                   VALUES ($userid, '$feed->name', '$feed->description', $datatype, 0, $engine);";
+      if ($connection->query($sqlQuery) !== TRUE) {
+        return false;
+      }
       // Assign the created feed id to the feeds array
+      $feeds[$feed->name] = $connection->insert_id;
     }
 
     return true;
@@ -232,15 +239,19 @@
   //   false: error creating the inputs
   function create_inputs($datafile, $userid, &$inputs, $connection) {
     // Create the inputs from file
-    $inputArray = json_decode(file_get_contents($datafile), true);
+    $inputArray = json_decode(file_get_contents($datafile));
 
     // Create each input
     foreach($inputArray as $input) {
-      // TODO
-      // Make query
+      // Query
+      $sqlQuery = "INSERT INTO input (userid, name, description)
+                   VALUES ($userid, '$input->name', '$input->description');";
+      if ($connection->query($sqlQuery) !== TRUE) {
+        return false;
+      }
       // Assign the created input id to the feeds array
+      $inputs[$input->name] = $connection->insert_id;
     }
-
     return true;
   }
 
@@ -248,7 +259,6 @@
   //
   // Parameters:
   //   $datafile: path to the processes data
-  //   $userid: id of the user
   //   $feeds: array of feed ids, in the format 'feedName'=>'feedId'
   //   $inputs: array of input ids, in the format 'inputName'=>'inputId'
   //   $connection: connection with the database
@@ -256,15 +266,53 @@
   // Returns
   //   true: processes successfully created
   //   false: error creating the processes
-  function create_processes($datafile, $userid, $feeds, $inputs, $connection) {
+  function create_processes($datafile, $feeds, $inputs, $connection) {
     // Read the processes from file
-    $processArray = json_decode(file_get_contents($datafile), true);
+    $processArray = json_decode(file_get_contents($datafile));
 
     // Create each process
     foreach($processArray as $process) {
-      // TODO
+      $inputId = $inputs[$process->input];
+
       // Translate process
-      // Make query
+      $processesStrings = array();
+      foreach($process->processes as $function) {
+        // Translate function
+        $functionId = get_function_id($function->function);
+
+        // Arguments
+        if(!empty($function->arguments)) {
+          $argumentsArray = array();
+          foreach($function->arguments as $argument) {
+            // Get the id of the feed name
+            if($argument->type == "feed") {
+              $argumentsArray[] = $feeds[$argument->value];
+            }
+            // Get the id of the input name
+            else if($argument->type == "input") {
+              $argumentsArray[] = $inputs[$argument->value];
+            }
+            // Get the value
+            else {
+              $argumentsArray[] = strval($argument->value);
+            }
+          }
+          $arguments = implode(':', $argumentsArray);
+        } else {
+          $arguments = "0";
+        }
+        $translatedFunction = strval($functionId) . ':$arguments';
+
+        // Add the translated string
+        $processesStrings[] = $translatedFunction;
+      }
+      $processes = implode(',', $processesStrings);
+
+      // Query
+      $sqlQuery = "UPDATE input SET processList='$processes' WHERE id=$inputId";
+      if ($connection->query($sqlQuery) !== TRUE) {
+        return false;
+      }
     }
 
     return true;
