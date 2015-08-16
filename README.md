@@ -36,11 +36,8 @@ Para ello, consta de los siguientes ficheros principales:
 
 * **index.php**: *front-end*, página web con un formulario para rellenar con los datos del usuario a crear
 * **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario
-<<<<<<< HEAD
 * **panel.php**: *front-end*, página web con formularios para asignar paneles a usuarios
 * **panel_query.php**: *back-end*, conjunto de funciones y consultas *SQL* para establecer los paneles de los usuarios
-=======
->>>>>>> 7b32dbe5b879eae9c68a3973e584e7d30fd8d649
 * **defs_emoncms.php**: definiciones auxiliares, dependientes de *emoncms*, sobre los números que se asignan a las funciones, los tipos de datos y los motores utilizados
 
 Adicionalmente, se guardan en la carpeta `data/` los archivos de definiciones de *feeds*, *inputs*, y *procesos* (conjunto de operaciones sobre cada *input*).
