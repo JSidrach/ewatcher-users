@@ -35,7 +35,9 @@ Este sistema permite crear, usando el navegador, usuarios en la plataforma *emon
 Para ello, consta de los siguientes ficheros principales:
 
 * **index.php**: *front-end*, página web con un formulario para rellenar con los datos del usuario a crear
-* **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario.
+* **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario
+* **panel.php**: *front-end*, página web con formularios para asignar paneles a usuarios
+* **panel_query.php**: *back-end*, conjunto de funciones y consultas *SQL* para establecer los paneles de los usuarios
 * **defs_emoncms.php**: definiciones auxiliares, dependientes de *emoncms*, sobre los números que se asignan a las funciones, los tipos de datos y los motores utilizados
 
 Adicionalmente, se guardan en la carpeta `data/` los archivos de definiciones de *feeds*, *inputs*, y *procesos* (conjunto de operaciones sobre cada *input*).
@@ -47,8 +49,12 @@ Se pueden validar las definiciones contra el esquema utilizando un *JSON Scheme 
 Se utilizan las siguientes librerías de terceros:
 
 * [SweetAlert](http://t4t5.github.io/sweetalert/): notificaciones
-* [registration-form](http://www.cssflow.com/snippets/registration-form): estilo del formulario
+* [Registration Form](http://www.cssflow.com/snippets/registration-form): estilo del formulario de creación de usuarios
+* [Sign Up Form](http://www.cssflow.com/snippets/sign-up-form): estilo del formulario de búsqueda de usuarios
+* [Settings Panel](http://www.cssflow.com/snippets/settings-panel): estilo del formulario de activación de paneles
+* [jQuery 2.1.4](https://jquery.com): consultas asíncronas y manipulación del documento *HTML*
 
 ### Tareas pendientes
-* Funciones en query.php de consultas a partir de los datos
-* Documentar funcionamiento del subproyecto
+* Datos de procesos, probar
+* paneles.php, paneles_query.php
+* BD: | userid | P1 | P2 | P3 | P4 | config

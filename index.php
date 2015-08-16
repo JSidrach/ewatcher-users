@@ -1,11 +1,8 @@
 <?php
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
   // Form not submitted yet
-  if (!isset($_POST['submitForm'])){
+  if (!isset($_REQUEST['submitForm'])){
     $result = false;
   }
   // Form submitted
@@ -25,7 +22,7 @@ ini_set('display_errors', 1);
     <meta charset="utf-8">
     <title>Creación de Usuarios - ISM Solar</title>
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="lib/style.css">
+    <link rel="stylesheet" href="lib/style_index.css">
     <link rel="stylesheet" type="text/css" href="lib/sweetalert.css">
     <script src="lib/sweetalert.min.js"></script>
   </head>
@@ -61,7 +58,7 @@ ini_set('display_errors', 1);
   </form>
   <div class="about">
     <p class="about-author">
-      <a href="http://www.ismsolar.com/" target="_blank">ISM Solar</a>
+      <a href="paneles.php">Asignación de Paneles</a>
     </p>
   </div>
   <script>

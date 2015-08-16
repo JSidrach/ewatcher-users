@@ -1,4 +1,6 @@
 <?php
+  // Settings
+  require_once('settings.php');
   // Emoncms definitions
   require_once('defs_emoncms.php');
 
@@ -74,9 +76,6 @@
   //   true: connection successfully created
   //   *anything else*: error string
   function create_connection(&$connection) {
-    // Get DB settings
-    require_once('settings.php');
-
     $connection = new mysqli($db_server, $db_username, $db_password, $db_name);
     if($connection->connect_error) {
       return true;
@@ -179,12 +178,10 @@
     $hash = hash('sha256', $salt . $hash);
     $apikey_write = md5(uniqid(mt_rand(), true));
     $apikey_read = md5(uniqid(mt_rand(), true));
-    $timezone = 'Europe/Madrid';
-    $language = 'es_ES';
 
     // Query
     $sqlQuery = "INSERT INTO users (username, password, email, salt ,apikey_read, apikey_write, admin, timezone, language)
-                 VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$timezone', '$language');";
+                 VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$user_zone', '$user_lang');";
     if ($connection->query($sqlQuery) !== TRUE) {
       return false;
     }
@@ -244,8 +241,8 @@
     // Create each input
     foreach($inputArray as $input) {
       // Query
-      $sqlQuery = "INSERT INTO input (userid, name, description)
-                   VALUES ($userid, '$input->name', '$input->description');";
+      $sqlQuery = "INSERT INTO input (userid, name, description, nodeid)
+                   VALUES ($userid, '$input->name', '$input->description', $user_node);";
       if ($connection->query($sqlQuery) !== TRUE) {
         return false;
       }
@@ -309,7 +306,7 @@
       $processes = implode(',', $processesStrings);
 
       // Query
-      $sqlQuery = "UPDATE input SET processList='$processes' WHERE id=$inputId";
+      $sqlQuery = "UPDATE input SET processList='$processes' WHERE id=$inputId;";
       if ($connection->query($sqlQuery) !== TRUE) {
         return false;
       }
