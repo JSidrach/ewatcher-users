@@ -80,6 +80,24 @@
     $functions['reset2zero'] = 33;
     $functions['wh_accumulator'] = 34;
     $functions['publish_to_mqtt'] = 35;
+    $functions['reset_to_NULL'] = 36;
+    $functions['reset_to_original'] = 37;
+    $functions['if_!schedule,_zero'] = 38;
+    $functions['if_!schedule,_NULL'] = 39;
+    $functions['if_schedule,_zero'] = 40;
+    $functions['if_schedule,_NULL'] = 41;
+    $functions['if_zero,_skip_next'] = 42;
+    $functions['if_!zero,_skip_next'] = 43;
+    $functions['if_NULL,_skip_next'] = 44;
+    $functions['if_!NULL,_skip_next'] = 45;
+    $functions['if_>,_skip_next'] = 46;
+    $functions['if_>=,_skip_next'] = 47;
+    $functions['if_<,_skip_next'] = 48;
+    $functions['if_<=,_skip_next'] = 49;
+    $functions['if_=,_skip_next'] = 50;
+    $functions['if_!=,_skip_next'] = 51;
+    $functions['GOTO'] = 52;
+    $functions['source_feed'] = 53;
 
     // Query
     return $functions[$function];

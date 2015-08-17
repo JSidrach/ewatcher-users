@@ -1,24 +1,258 @@
 [
   {
-    "input": "nombre del input, por ej, ipv",
+    "input": "ppvm",
     "processes": [
       {
-        "function": "nombre de la funcion (ver defs_emoncms.php)",
+        "function": "if_>,_skip_next",
         "arguments": [
           {
-            "type": "feed/input/value",
-            "value": "nombre del feed/input, valor (sin comillas si es valor)"
+            "type": "value",
+            "value": 15
           }
         ]
-      }
-    ]
-  },
-  {
-    "input": "nombre del input, por ej, ipv",
-    "processes": [
+      },
       {
-        "function": "nombre de la funcion (ver defs_emoncms.php)",
-        "arguments": []
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "ppv"
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwhd",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "ppv"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDPv"
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwh",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "ppv"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tPv"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "ppv"
+          }
+        ]
+      },
+      {
+        "function": "allownegative",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "subtract_input",
+        "arguments": [
+          {
+            "type": "input",
+            "value": "pload"
+          }
+        ]
+      },
+      {
+        "function": "if_>=,_skip_next",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "IPvToNet"
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwhd",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "IPvToNet"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDPvToNet"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDPv"
+          }
+        ]
+      },
+      {
+        "function": "sub_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDPvToNet"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDLoadFromPv"
+          }
+        ]
+      },
+      {
+        "function": "scale",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 100
+          }
+        ]
+      },
+      {
+        "function": "divide_by_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDPv"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "dPSelf"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDLoadFromPv"
+          }
+        ]
+      },
+      {
+        "function": "scale",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 100
+          }
+        ]
+      },
+      {
+        "function": "divide_by_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDLoad"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "dPLoadFromPv"
+          }
+        ]
       }
     ]
   }

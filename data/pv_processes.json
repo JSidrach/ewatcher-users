@@ -1,24 +1,321 @@
 [
   {
-    "input": "nombre del input, por ej, ipv",
+    "input": "pload",
     "processes": [
       {
-        "function": "nombre de la funcion (ver defs_emoncms.php)",
+        "function": "log_to_feed",
         "arguments": [
           {
-            "type": "feed/input/value",
-            "value": "nombre del feed/input, valor (sin comillas si es valor)"
+            "type": "feed",
+            "value": "pLoadM"
           }
         ]
-      }
-    ]
-  },
-  {
-    "input": "nombre del input, por ej, ipv",
-    "processes": [
+      },
       {
-        "function": "nombre de la funcion (ver defs_emoncms.php)",
-        "arguments": []
+        "function": "power_to_kwhd",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "pLoadM"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDLoad"
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwh",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "pLoadM"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tLoad"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "pLoadM"
+          }
+        ]
+      },
+      {
+        "function": "allownegative",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "sub_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "ppv"
+          }
+        ]
+      },
+      {
+        "function": "if_>,_skip_next",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iGridToLoad"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "pLoadM"
+          }
+        ]
+      },
+      {
+        "function": "sub_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iGridToLoad"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iPvToload"
+          }
+        ]
+      },
+      {
+        "function": "scale",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 100
+          }
+        ]
+      },
+      {
+        "function": "divide_by_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "pLoadM"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iPLoadFromPv"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iGridToload"
+          }
+        ]
+      },
+      {
+        "function": "scale",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 100
+          }
+        ]
+      },
+      {
+        "function": "divide_by_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "pLoadM"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iPLoadFromNet"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwhd",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iGridToload"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "eDNet"
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwh",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iGridToload"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tLoadFromNet"
+          }
+        ]
+      },
+      {
+        "function": "power_to_kwh",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "iPvToLoad"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tPvToLoad"
+          }
+        ]
+      },
+      {
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tPv"
+          }
+        ]
+      },
+      {
+        "function": "sub_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tPvToLoad"
+          }
+        ]
+      },
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "tPvToNet"
+          }
+        ]
       }
     ]
   }
