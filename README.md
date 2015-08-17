@@ -56,5 +56,4 @@ Se utilizan las siguientes librerías de terceros:
 
 ### Tareas pendientes
 * Datos de procesos, probar
-* paneles.php, paneles_query.php
-* BD: | userid | P1 | P2 | P3 | P4 | config
+* Probar asignación de paneles

@@ -16,9 +16,10 @@
   // User introduced
   else {
     // If not valid
-    if(check_user($_REQUEST['username']) === false) {
+    $checkUser = check_user($_REQUEST['username']);
+    if($checkUser !== true) {
       $mode = 'search';
-      $error = 'Usuario no encontrado';
+      $error = $checkUser;
     }
     else {
       // If valid
@@ -71,24 +72,30 @@
           <input class="targetPanel" type="checkbox" name="P1" value="P1" <?php if($panel_values['P1']) echo "checked"?>>
           <span class="settings-switch"><span class="settings-switch-handle"></span></span>
           <strong>Panel #1</strong>
-          Consumo Eléctrico
+          ConsumoE: Valores instantáneos y totales de hoy
         </label>
         <label>
           <input class="targetPanel" type="checkbox" name="P2" value="P2" <?php if($panel_values['P2']) echo "checked"?>>
           <span class="settings-switch"><span class="settings-switch-handle"></span></span>
           <strong>Panel #2</strong>
-          FV: Valores instantáneos y totales de hoy
+          ConsumoE: Consultas
         </label>
         <label>
           <input class="targetPanel" type="checkbox" name="P3" value="P3" <?php if($panel_values['P3']) echo "checked"?>>
           <span class="settings-switch"><span class="settings-switch-handle"></span></span>
           <strong>Panel #3</strong>
-          FV: Consultas
+          FV: Valores instantáneos y totales de hoy
         </label>
         <label>
           <input class="targetPanel" type="checkbox" name="P4" value="P4" <?php if($panel_values['P4']) echo "checked"?>>
           <span class="settings-switch"><span class="settings-switch-handle"></span></span>
           <strong>Panel #4</strong>
+          FV: Consultas
+        </label>
+        <label>
+          <input class="targetPanel" type="checkbox" name="P5" value="P5" <?php if($panel_values['P5']) echo "checked"?>>
+          <span class="settings-switch"><span class="settings-switch-handle"></span></span>
+          <strong>Panel #5</strong>
           FV: Valores diarios
         </label>
       </form>
@@ -123,10 +130,10 @@
         var query = "paneles_query.php?user=" + $('#targetUsername').text() + "&togglePanel=" + this.value + "&set=" + setTo;
         $.ajax({
           url: query,
-          error: function() {
+          error: function(xhr, status, error) {
             swal({
               title: "Error",
-              text: "Error al procesar la petición",
+              text: xhr.responseText,
               type: "error",
               confirmButtonText: "Continuar"
             });

@@ -99,6 +99,7 @@
     else {
       $connection->commit();
     }
+    $connection->autocommit(TRUE);
     $connection->close();
   }
 
@@ -116,7 +117,6 @@
   function validate_input($username, $email, $password, $panelType) {
     // Username
     if((!isset($username)) || (strlen($username) == 0)) {
-      echo $username;
       return 'Introduzca un nombre de usuario';
     }
     if(!ctype_alnum($username)) {
@@ -182,7 +182,7 @@
     // Query
     $sqlQuery = "INSERT INTO users (username, password, email, salt ,apikey_read, apikey_write, admin, timezone, language)
                  VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$user_zone', '$user_lang');";
-    if ($connection->query($sqlQuery) !== TRUE) {
+    if ($connection->query($sqlQuery) === FALSE) {
       return false;
     }
 
@@ -213,7 +213,7 @@
       $engine = get_engine_id($feed->engine);
       $sqlQuery = "INSERT INTO feeds (userid, name, tag, datatype, public, engine)
                    VALUES ($userid, '$feed->name', '$feed->description', $datatype, 0, $engine);";
-      if ($connection->query($sqlQuery) !== TRUE) {
+      if ($connection->query($sqlQuery) === FALSE) {
         return false;
       }
       // Assign the created feed id to the feeds array
@@ -243,7 +243,7 @@
       // Query
       $sqlQuery = "INSERT INTO input (userid, name, description, nodeid)
                    VALUES ($userid, '$input->name', '$input->description', $user_node);";
-      if ($connection->query($sqlQuery) !== TRUE) {
+      if ($connection->query($sqlQuery) === FALSE) {
         return false;
       }
       // Assign the created input id to the feeds array
@@ -298,7 +298,7 @@
         } else {
           $arguments = "0";
         }
-        $translatedFunction = strval($functionId) . ':$arguments';
+        $translatedFunction = strval($functionId) . ":$arguments";
 
         // Add the translated string
         $processesStrings[] = $translatedFunction;
@@ -307,7 +307,7 @@
 
       // Query
       $sqlQuery = "UPDATE input SET processList='$processes' WHERE id=$inputId;";
-      if ($connection->query($sqlQuery) !== TRUE) {
+      if ($connection->query($sqlQuery) === FALSE) {
         return false;
       }
     }
