@@ -1,5 +1,23 @@
 [
   {
+    "name": "sILoad",
+    "description": "Intensidad consumo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "sPLoad",
+    "description": "Potencia consumo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "sVoltage",
+    "description": "Voltaje",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
     "name": "eDLoad",
     "description": "Consumo diario",
     "type": "DAILY",

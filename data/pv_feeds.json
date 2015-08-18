@@ -1,19 +1,43 @@
 [
   {
-    "name": "ppv",
-    "description": "Potencia FV medida",
+    "name": "sIPv",
+    "description": "Intensidad FV",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "sPPv",
+    "description": "Potencia FV",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "sILoad",
+    "description": "Intensidad consumo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "sPLoad",
+    "description": "Potencia consumo",
+    "type": "REALTIME",
+    "engine": "PHPFIWA"
+  },
+  {
+    "name": "sVoltage",
+    "description": "Voltaje",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "iPvToLoad",
-    "description": "Potencia fotovoltaica a consumo",
+    "description": "Potencia FV a consumo",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "iGridToLoad",
-    "description": "Potencia Red a consumo",
+    "description": "Potencia red a consumo",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
@@ -37,7 +61,7 @@
   },
   {
     "name": "eDPv",
-    "description": "Energía fotovoltaica diaria",
+    "description": "Energía FV diaria",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
