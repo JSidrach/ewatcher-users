@@ -1,31 +1,27 @@
 [
   {
-    "input": "ppvm",
+    "input": "iload",
     "processes": [
       {
-        "function": "if_>,_skip_next",
+        "function": "log_to_feed",
         "arguments": [
           {
-            "type": "value",
-            "value": 15
+            "type": "feed",
+            "value": "sILoad"
           }
         ]
-      },
-      {
-        "function": "reset2zero",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
+      }
+    ]
+  },
+  {
+    "input": "pload",
+    "processes": [
       {
         "function": "log_to_feed",
         "arguments": [
           {
             "type": "feed",
-            "value": "ppv"
+            "value": "sPLoad"
           }
         ]
       },
@@ -34,210 +30,12 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "ppv"
+            "value": "sPLoad"
           }
         ]
       },
       {
         "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDPv"
-          }
-        ]
-      },
-      {
-        "function": "power_to_kwh",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "ppv"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "tPv"
-          }
-        ]
-      },
-      {
-        "function": "reset2zero",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "add_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "ppv"
-          }
-        ]
-      },
-      {
-        "function": "allownegative",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "subtract_input",
-        "arguments": [
-          {
-            "type": "input",
-            "value": "pload"
-          }
-        ]
-      },
-      {
-        "function": "if_>=,_skip_next",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "reset2zero",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "IPvToNet"
-          }
-        ]
-      },
-      {
-        "function": "power_to_kwhd",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "IPvToNet"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDPvToNet"
-          }
-        ]
-      },
-      {
-        "function": "reset2zero",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "add_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDPv"
-          }
-        ]
-      },
-      {
-        "function": "sub_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDPvToNet"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDLoadFromPv"
-          }
-        ]
-      },
-      {
-        "function": "scale",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 100
-          }
-        ]
-      },
-      {
-        "function": "divide_by_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDPv"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "dPSelf"
-          }
-        ]
-      },
-      {
-        "function": "reset2zero",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "add_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "eDLoadFromPv"
-          }
-        ]
-      },
-      {
-        "function": "scale",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 100
-          }
-        ]
-      },
-      {
-        "function": "divide_by_feed",
         "arguments": [
           {
             "type": "feed",
@@ -246,14 +44,39 @@
         ]
       },
       {
+        "function": "power_to_kwh",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "sPLoad"
+          }
+        ]
+      },
+      {
         "function": "log_to_feed",
         "arguments": [
           {
             "type": "feed",
-            "value": "dPLoadFromPv"
+            "value": "tLoad"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "input": "voltage",
+    "processes": [
+      {
+        "function": "log_to_feed",
+        "arguments": [
+          {
+            "type": "feed",
+            "value": "sVoltage"
           }
         ]
       }
     ]
   }
 ]
+
+
