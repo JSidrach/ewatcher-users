@@ -43,13 +43,13 @@
   },
   {
     "name": "iPLoadFromPv",
-    "description": "Porcentaje de consumo con FV instantáneo",
+    "description": "Porcentaje de consumo con FV actual",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "iPLoadFromNet",
-    "description": "Porcentaje de consumo de red instantáneo",
+    "description": "Porcentaje de consumo de red actual",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },

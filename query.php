@@ -25,13 +25,13 @@
     // Validate input
     $ret = validate_input($username, $email, $password, $panelType);
     if($ret !== true) {
-      end_connection($connection, true);
+      end_connection(true, $connection);
       return $ret;
     }
 
     // Create user
     if(create_user($username, $email, $password, $userid, $connection) !== true) {
-      end_connection($connection, true);
+      end_connection(true, $connection);
       return 'El nombre de usuario ya existe';
     }
 
@@ -48,22 +48,23 @@
 
     // Create feeds
     if(create_feeds($prefix . '_feeds.json', $userid, $feeds, $connection) !== true) {
-      end_connection($connection, true);
+      end_connection(true, $connection);
       return 'Fallo al crear los feeds';
     }
 
     // Create inputs
     if(create_inputs($prefix . '_inputs.json', $userid, $inputs, $connection) !== true) {
-      end_connection($connection, true);
+      end_connection(true, $connection);
       return 'Fallo al crear los inputs';
     }
 
     // Create processes
     if(create_processes($prefix . '_processes.json', $feeds, $inputs, $connection) !== true) {
-      end_connection($connection, true);
+      end_connection(true, $connection);
       return 'Fallo al crear los procesos';
     }
 
+    end_connection(false, $connection);
     return true;
   }
 
@@ -177,6 +178,11 @@
     // Global variables
     global $user_zone, $user_lang;
 
+    // Search if user exists
+    if($connection->query("SELECT * FROM users WHERE username='$username';")->num_rows != 0) {
+      return false;
+    }
+
     // Rest of the parameters
     $hash = hash('sha256', $password);
     $string = md5(uniqid(mt_rand(), true));
@@ -212,6 +218,9 @@
     // Read the feeds from file
     $feedArray = json_decode(file_get_contents($datafile));
 
+    // UTF-8 for the descriptions
+    $connection->set_charset("utf8");
+
     // Create each feed
     foreach($feedArray as $feed) {
       // Query
@@ -246,6 +255,9 @@
 
     // Create the inputs from file
     $inputArray = json_decode(file_get_contents($datafile));
+
+    // UTF-8 for the descriptions
+    $connection->set_charset("utf8");
 
     // Create each input
     foreach($inputArray as $input) {
