@@ -7,7 +7,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "sPpv"
+            "value": "sPPv"
           }
         ]
       },
@@ -106,7 +106,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "IPvToNet"
+            "value": "iPvToNet"
           }
         ]
       },
@@ -115,7 +115,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "IPvToNet"
+            "value": "iPvToNet"
           }
         ]
       },
@@ -381,7 +381,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "iPvToload"
+            "value": "iPvToLoad"
           }
         ]
       },
@@ -426,7 +426,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "iGridToload"
+            "value": "iGridToLoad"
           }
         ]
       },
@@ -471,7 +471,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "iGridToload"
+            "value": "iGridToLoad"
           }
         ]
       },
@@ -489,7 +489,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "iGridToload"
+            "value": "iGridToLoad"
           }
         ]
       },
@@ -566,7 +566,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "sIpv"
+            "value": "sIPv"
           }
         ]
       }
