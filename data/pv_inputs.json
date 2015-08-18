@@ -4,8 +4,8 @@
     "description": "Intensidad fotovoltaica"
   },
   {
-    "name": "ppvm",
-    "description": "Potencia fotovoltaica medida"
+    "name": "ppv",
+    "description": "Potencia fotovoltaica"
   },
   {
     "name": "iload",
