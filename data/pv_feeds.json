@@ -61,13 +61,13 @@
   },
   {
     "name": "eDPv",
-    "description": "Energía FV diaria",
+    "description": "Energia FV diaria",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
     "name": "eDNet",
-    "description": "Energía diaria de la red",
+    "description": "Energia diaria de la red",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
@@ -79,7 +79,7 @@
   },
   {
     "name": "eDPvToNet",
-    "description": "Energía FV a red diaria",
+    "description": "Energia FV a red diaria",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
@@ -97,7 +97,7 @@
   },
   {
     "name": "eDLoadFromPv",
-    "description": "Energía consumo diario de FV",
+    "description": "Energia consumo diario de FV",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
@@ -109,25 +109,25 @@
   },
   {
     "name": "tPv",
-    "description": "Energía FV generada total",
+    "description": "Energia FV generada total",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
     "name": "tLoadFromNet",
-    "description": "Energía total importada de la red",
+    "description": "Energia total importada de la red",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
     "name": "tPvToLoad",
-    "description": "Energía FV a consumo total",
+    "description": "Energia FV a consumo total",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
     "name": "tPvToNet",
-    "description": "Energía FV inyectada a red total",
+    "description": "Energia FV inyectada a red total",
     "type": "REALTIME",
     "engine": "PHPFINA"
   }

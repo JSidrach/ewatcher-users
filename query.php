@@ -218,9 +218,6 @@
     // Read the feeds from file
     $feedArray = json_decode(file_get_contents($datafile));
 
-    // UTF-8 for the descriptions
-    $connection->set_charset("utf8");
-
     // Create each feed
     foreach($feedArray as $feed) {
       // Query
@@ -255,9 +252,6 @@
 
     // Create the inputs from file
     $inputArray = json_decode(file_get_contents($datafile));
-
-    // UTF-8 for the descriptions
-    $connection->set_charset("utf8");
 
     // Create each input
     foreach($inputArray as $input) {
