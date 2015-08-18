@@ -65,6 +65,9 @@
   //   true: user exists
   //   false: user does not exist
   function check_user($username) {
+    // Global variables
+    global $db_server, $db_username, $db_password, $db_name, $schema;
+
     // Check valid username
     if((!isset($username)) || (strlen($username) < 4) || (strlen($username) > 30) || (!ctype_alnum($username))) {
       return 'Formato de usuario inválido';
@@ -84,7 +87,7 @@
 
     // Check if user exists in the users table, get userid
     $result = $connection->query("SELECT id FROM users WHERE username='$username';");
-    if(($result === FALSE) || (empty($result))) {
+    if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       $connection->close();
       return 'Usuario no existente';
     }
@@ -92,7 +95,7 @@
 
     // Check if user exists in the ewatcher table
     $result = $connection->query("SELECT * FROM ewatcher WHERE userid=$userid");
-    if(($result === FALSE) || (empty($result))) {
+    if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       // Create ewatcher user config if it does not exist
       if($connection->query("INSERT INTO ewatcher (userid) VALUES ($userid);") === FALSE) {
         $connection->close();
@@ -113,6 +116,9 @@
   //   false: error
   //   *array*: array of panel toggles, 'PanelName' => true, or 'PanelName' => false
   function get_panel_values($username) {
+    // Global variables
+    global $db_server, $db_username, $db_password, $db_name;
+
     // Create connection
     $connection = new mysqli($db_server, $db_username, $db_password, $db_name);
     if($connection->connect_error) {
@@ -121,13 +127,13 @@
 
     // Get panel values
     $result = $connection->query("SELECT id FROM users WHERE username='$username';");
-    if(($result === FALSE) || (empty($result))) {
+    if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       $connection->close();
       return false;
     }
     $userid = $result->fetch_object()->id;
     $result = $connection->query("SELECT * FROM ewatcher WHERE userid=$userid");
-    if(($result === FALSE) || (empty($result))) {
+    if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       $connection->close();
       return false;
     }
@@ -152,12 +158,16 @@
   //   false: error
   //   true: success
   function check_table($connection, $table, $schema) {
-    $result = $connection->query('SELECT * FROM $table;');
-    if(($result === FALSE) || (empty($result))) {
+    $connection->set_charset("utf8");
+    $result = $connection->query("SHOW TABLES LIKE '$table';");
+    if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       // Create table
       $createQuery = "CREATE TABLE $table (";
       foreach($schema as $column => $properties) {
-        $createQuery .= $column . ' ' . $properties('type');
+        $createQuery .= $column . ' ' . $properties['type'];
+        if($properties['type'] == 'text') {
+          $createQuery .= ' character set utf8';
+        }
         // Not null
         if((isset($properties['Null'])) && ($properties['Null'] == 'NO')) {
           $createQuery .= ' NOT NULL';

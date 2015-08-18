@@ -76,6 +76,9 @@
   //   true: connection successfully created
   //   *anything else*: error string
   function create_connection(&$connection) {
+    // Global variables
+    global $db_server, $db_username, $db_password, $db_name;
+
     $connection = new mysqli($db_server, $db_username, $db_password, $db_name);
     if($connection->connect_error) {
       return true;
@@ -171,6 +174,9 @@
   //   true: user successfully created
   //   false: error creating the user (already exists)
   function create_user($username, $email, $password, &$userid, $connection) {
+    // Global variables
+    global $user_zone, $user_lang;
+
     // Rest of the parameters
     $hash = hash('sha256', $password);
     $string = md5(uniqid(mt_rand(), true));
@@ -235,6 +241,9 @@
   //   true: inputs successfully created
   //   false: error creating the inputs
   function create_inputs($datafile, $userid, &$inputs, $connection) {
+    // Global variables
+    global $user_node;
+
     // Create the inputs from file
     $inputArray = json_decode(file_get_contents($datafile));
 
