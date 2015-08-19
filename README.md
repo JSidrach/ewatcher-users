@@ -55,6 +55,4 @@ Se utilizan las siguientes librerías de terceros:
 * [jQuery 2.1.4](https://jquery.com): consultas asíncronas y manipulación del documento *HTML*
 
 ### Tareas pendientes
-* Terminar json procesos
 * Verificar/validar datos de inputs, feeds y procesos
-* Probar la creación automática de todo
