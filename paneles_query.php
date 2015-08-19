@@ -94,7 +94,7 @@
     $userid = $result->fetch_object()->id;
 
     // Check if user exists in the ewatcher table
-    $result = $connection->query("SELECT * FROM ewatcher WHERE userid=$userid");
+    $result = $connection->query("SELECT * FROM ewatcher WHERE userid=$userid;");
     if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       // Create ewatcher user config if it does not exist
       if($connection->query("INSERT INTO ewatcher (userid) VALUES ($userid);") === FALSE) {
@@ -132,7 +132,7 @@
       return false;
     }
     $userid = $result->fetch_object()->id;
-    $result = $connection->query("SELECT * FROM ewatcher WHERE userid=$userid");
+    $result = $connection->query("SELECT * FROM ewatcher WHERE userid=$userid;");
     if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       $connection->close();
       return false;
