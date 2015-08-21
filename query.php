@@ -16,10 +16,23 @@
   //   true: user, feeds and inputs successfully created
   //   *anything else*: error string
   function create_linked_user($username, $email, $password, $panelType) {
+    // Global variables
+    global $redis_enabled, $redis_server;
+
     // Connect to the DB
     $ret = create_connection($connection);
     if($ret !== true) {
       return $ret;
+    }
+
+    // Connect to Redis
+    if($redis_enabled === true) {
+      $redis = new Redis();
+      if(!$redis->connect($redis_server)) {
+        $redis = false;
+      }
+    } else {
+      $redis = false;
     }
 
     // Validate input
@@ -30,7 +43,7 @@
     }
 
     // Create user
-    if(create_user($username, $email, $password, $userid, $connection) !== true) {
+    if(create_user($username, $email, $password, $userid, $apikey, $connection) !== true) {
       end_connection(true, $connection);
       return 'El nombre de usuario ya existe';
     }
@@ -47,19 +60,19 @@
     }
 
     // Create feeds
-    if(create_feeds($prefix . '_feeds.json', $userid, $feeds, $connection) !== true) {
+    if(create_feeds($prefix . '_feeds.json', $feeds, $apikey) !== true) {
       end_connection(true, $connection);
       return 'Fallo al crear los feeds';
     }
 
     // Create inputs
-    if(create_inputs($prefix . '_inputs.json', $userid, $inputs, $connection) !== true) {
+    if(create_inputs($prefix . '_inputs.json', $userid, $inputs, $connection, $redis) !== true) {
       end_connection(true, $connection);
       return 'Fallo al crear los inputs';
     }
 
     // Create processes
-    if(create_processes($prefix . '_processes.json', $feeds, $inputs, $connection) !== true) {
+    if(create_processes($prefix . '_processes.json', $feeds, $inputs, $apikey) !== true) {
       end_connection(true, $connection);
       return 'Fallo al crear los procesos';
     }
@@ -169,12 +182,13 @@
   //   $email: email of the user
   //   $password: password of the user
   //   $userid: output parameter, id of the user created
+  //   $apikey: output parameter, write API key of the user
   //   $connection: connection with the database
   //
   // Returns
   //   true: user successfully created
   //   false: error creating the user (already exists)
-  function create_user($username, $email, $password, &$userid, $connection) {
+  function create_user($username, $email, $password, &$userid, &$apikey, $connection) {
     // Global variables
     global $user_zone, $user_lang;
 
@@ -190,6 +204,7 @@
     $hash = hash('sha256', $salt . $hash);
     $apikey_write = md5(uniqid(mt_rand(), true));
     $apikey_read = md5(uniqid(mt_rand(), true));
+    $apikey = $apikey_write;
 
     // Query
     $sqlQuery = "INSERT INTO users (username, password, email, salt ,apikey_read, apikey_write, admin, timezone, language)
@@ -200,6 +215,7 @@
 
     // Asign userid
     $userid = $connection->insert_id;
+
     return true;
   }
 
@@ -207,14 +223,16 @@
   //
   // Parameters:
   //   $datafile: path to the feeds data
-  //   $userid: id of the user
   //   $feeds: output parameter for the feeds, in the format 'feedName'=>'feedId'
-  //   $connection: connection with the database
+  //   $apikey: write API key
   //
   // Returns
   //   true: feeds successfully created
   //   false: error creating the feeds
-  function create_feeds($datafile, $userid, &$feeds, $connection) {
+  function create_feeds($datafile, &$feeds, $apikey) {
+    // Global variables
+    global $base_url;
+
     // Read the feeds from file
     $feedArray = json_decode(file_get_contents($datafile));
 
@@ -223,13 +241,14 @@
       // Query
       $datatype = get_type_id($feed->type);
       $engine = get_engine_id($feed->engine);
-      $sqlQuery = "INSERT INTO feeds (userid, name, tag, datatype, public, engine)
-                   VALUES ($userid, '$feed->name', '$feed->description', $datatype, 0, $engine);";
-      if ($connection->query($sqlQuery) === FALSE) {
+      $url = str_replace(' ', '%20', $base_url . "feed/create.json?tag=$feed->description&name=$feed->name&datatype=$datatype&engine=$engine&apikey=$apikey&options={\"interval\":10}");
+      $result = json_decode(file_get_contents($url), true);
+      if($result["success"] !== true) {
         return false;
       }
+
       // Assign the created feed id to the feeds array
-      $feeds[$feed->name] = $connection->insert_id;
+      $feeds[$feed->name] = $result["feedid"];
     }
 
     return true;
@@ -242,11 +261,12 @@
   //   $userid: id of the user
   //   $inputs: output parameter for the inputs, in the format 'inputName'=>'inputId'
   //   $connection: connection with the database
+  //   $redis: redis connection
   //
   // Returns
   //   true: inputs successfully created
   //   false: error creating the inputs
-  function create_inputs($datafile, $userid, &$inputs, $connection) {
+  function create_inputs($datafile, $userid, &$inputs, $connection, $redis) {
     // Global variables
     global $user_node;
 
@@ -262,8 +282,16 @@
         return false;
       }
       // Assign the created input id to the feeds array
-      $inputs[$input->name] = $connection->insert_id;
+      $inputId = $connection->insert_id;
+      $inputs[$input->name] = $inputId;
+
+      // Redis query
+      if($redis !== false) {
+        $redis->sAdd("user:inputs:$userid", $inputId);
+        $redis->hMSet("input:$inputId",array('id'=>$inputId,'nodeid'=>$user_node,'name'=>$input->name,'description'=>$input->description, 'processList'=>""));
+      }
     }
+
     return true;
   }
 
@@ -273,12 +301,15 @@
   //   $datafile: path to the processes data
   //   $feeds: array of feed ids, in the format 'feedName'=>'feedId'
   //   $inputs: array of input ids, in the format 'inputName'=>'inputId'
-  //   $connection: connection with the database
+  //   $apikey: write API key
   //
   // Returns
   //   true: processes successfully created
   //   false: error creating the processes
-  function create_processes($datafile, $feeds, $inputs, $connection) {
+  function create_processes($datafile, $feeds, $inputs, $apikey) {
+    // Global variables
+    global $base_url;
+
     // Read the processes from file
     $processArray = json_decode(file_get_contents($datafile));
 
@@ -318,15 +349,14 @@
         // Add the translated string
         $processesStrings[] = $translatedFunction;
       }
-      $processes = implode(',', $processesStrings);
+      $processes = implode(",", $processesStrings);
 
       // Query
-      $sqlQuery = "UPDATE input SET processList='$processes' WHERE id=$inputId;";
-      if ($connection->query($sqlQuery) === FALSE) {
+      $result = file_get_contents("$base_url/input/process/set.json?inputid=$inputId&processlist=$processes&apikey=$apikey");
+      if(($result == "false") || ($result === FALSE)) {
         return false;
       }
     }
-
     return true;
   }
 ?>

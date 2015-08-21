@@ -10,6 +10,13 @@
   $user_lang   = "es_ES";
   $user_node   = 7;
 
+  // Base url
+  $base_url    = "http://localhost/emoncms/";
+
+  // Redis
+  $redis_enabled = false;
+  $redis_server = "127.0.0.1";
+
   // eWatcher table schema
   $schema['ewatcher'] = array(
     "userid" => array("type" => "int(11)", "Null" => "NO"),
