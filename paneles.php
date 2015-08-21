@@ -105,8 +105,8 @@
     ?>
     <div class="about">
       <p class="about-author">
-        <?php if($mode == 'toggle') echo '<a href="paneles.php">Búsqueda de Usuarios</a> | '; ?>
-        <a href="index.php">Creación de Usuarios</a>
+        <?php if($mode == 'toggle') echo '<a href="paneles.php">Volver</a> | '; ?>
+        <a href="index.php">Creación de Usuarios</a> | <a href="borrado.php">Borrado de Usuarios</a>
       </p>
     </div>
     <script>

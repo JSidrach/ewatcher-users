@@ -58,7 +58,7 @@
   </form>
   <div class="about">
     <p class="about-author">
-      <a href="paneles.php">Asignación de Paneles</a>
+      <a href="paneles.php">Asignación de Paneles</a>  | <a href="borrado.php">Borrado de Usuarios</a>
     </p>
   </div>
   <script>
