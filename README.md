@@ -1,5 +1,5 @@
 # Gestión de Usuarios
-Sistema para crea/asignar paneles/borrar, mediante el navegador, usuarios en la plataforma emoncms, dentro de alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
+Sistema para crear/borrar usuarios de la plataforma *emoncms*, y asignarles paneles dentro de alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
 
 ### Instalación y Configuración
 * **NOTA**: es necesario haber instalado *emoncms* previamente
