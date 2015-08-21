@@ -4,8 +4,8 @@ Sistema para crear/borrar usuarios de la plataforma *emoncms*, y asignarles pane
 ### Instalación y Configuración
 * **NOTA**: es necesario haber instalado *emoncms* previamente
 * Situarse en la carpeta de *Apache* (`/var/www/html/`)
-* Clonar el repositorio mediante `git clone https://USUARIO@bitbucket.org/ismsolar/creacion-usuarios.git`, sustituyendo `USUARIO` por tu nombre de usuario
-* Situarse en la carpeta del proyecto (`/var/www/html/creacion-usuarios/`)
+* Clonar el repositorio mediante `git clone https://USUARIO@bitbucket.org/ismsolar/gestion-usuarios.git`, sustituyendo `USUARIO` por tu nombre de usuario
+* Situarse en la carpeta del proyecto (`/var/www/html/gestion-usuarios/`)
 * Copiar el archivo `default.settings.php` a `settings.php` (`cp default.settings.php settings.php`)
 * Editar el archivo `settings.php` estableciendo los parámetros de conexión a la base de datos
 * Copiar el archivo `default.htpasswd` a `.htpasswd` (`cp default.htpasswd .htpasswd`)
