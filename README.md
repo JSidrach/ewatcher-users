@@ -1,5 +1,5 @@
-# Creación Automática de Usuarios
-Sistema para crear, mediante el navegador, usuarios en la plataforma *emoncms*, asignándoles automáticamente alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
+# Gestión de Usuarios
+Sistema para crea/asignar paneles/borrar, mediante el navegador, usuarios en la plataforma emoncms, dentro de alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
 
 ### Instalación y Configuración
 * **NOTA**: es necesario haber instalado *emoncms* previamente
@@ -32,12 +32,15 @@ Abrir en el navegador la dirección del servidor en el que se ha instalado el pr
 
 ### Funcionalidad
 Este sistema permite crear, usando el navegador, usuarios en la plataforma *emoncms*, asignándoles *feeds* e *inputs* según qué perfil se seleccione (Autoconsumo FV o Consumo Eléctrico).
+Permite también asignarles paneles, y borrar usuarios con todos sus datos asociados.
 Para ello, consta de los siguientes ficheros principales:
 
 * **index.php**: *front-end*, página web con un formulario para rellenar con los datos del usuario a crear
 * **query.php**: *back-end*, conjunto de funciones y consultas *SQL* para crear los usuarios, *feeds* e *inputs*, así como validar el formulario
 * **panel.php**: *front-end*, página web con formularios para asignar paneles a usuarios
 * **panel_query.php**: *back-end*, conjunto de funciones y consultas *SQL* para establecer los paneles de los usuarios
+* **boorado.php**: *front-end*, página web con formularios para borrar usuarios
+* **borrado_query.php**: *back-end*, conjunto de funciones y consultas *SQL* para borrar los usuarios y todos los datos que tengan asociados
 * **defs_emoncms.php**: definiciones auxiliares, dependientes de *emoncms*, sobre los números que se asignan a las funciones, los tipos de datos y los motores utilizados
 
 Adicionalmente, se guardan en la carpeta `data/` los archivos de definiciones de *feeds*, *inputs*, y *procesos* (conjunto de operaciones sobre cada *input*).
