@@ -30,21 +30,21 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "sPLoad"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
             "value": "eDLoad"
           }
         ]
       },
       {
-        "function": "power_to_kwh",
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
         "arguments": [
           {
             "type": "feed",
@@ -53,7 +53,7 @@
         ]
       },
       {
-        "function": "log_to_feed",
+        "function": "power_to_kwh",
         "arguments": [
           {
             "type": "feed",

@@ -16,21 +16,21 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "sPPv"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
             "value": "eDPv"
           }
         ]
       },
       {
-        "function": "power_to_kwh",
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
         "arguments": [
           {
             "type": "feed",
@@ -39,7 +39,7 @@
         ]
       },
       {
-        "function": "log_to_feed",
+        "function": "power_to_kwh",
         "arguments": [
           {
             "type": "feed",
@@ -112,15 +112,6 @@
       },
       {
         "function": "power_to_kwhd",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "iPvToNet"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
         "arguments": [
           {
             "type": "feed",
@@ -255,21 +246,21 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "sPLoad"
-          }
-        ]
-      },
-      {
-        "function": "log_to_feed",
-        "arguments": [
-          {
-            "type": "feed",
             "value": "eDLoad"
           }
         ]
       },
       {
-        "function": "power_to_kwh",
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
         "arguments": [
           {
             "type": "feed",
@@ -278,7 +269,7 @@
         ]
       },
       {
-        "function": "log_to_feed",
+        "function": "power_to_kwh",
         "arguments": [
           {
             "type": "feed",
@@ -467,7 +458,7 @@
         ]
       },
       {
-        "function": "power_to_kwhd",
+        "function": "add_feed",
         "arguments": [
           {
             "type": "feed",
@@ -476,7 +467,7 @@
         ]
       },
       {
-        "function": "log_to_feed",
+        "function": "power_to_kwhd",
         "arguments": [
           {
             "type": "feed",
@@ -485,7 +476,16 @@
         ]
       },
       {
-        "function": "power_to_kwh",
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
         "arguments": [
           {
             "type": "feed",
@@ -494,7 +494,7 @@
         ]
       },
       {
-        "function": "log_to_feed",
+        "function": "power_to_kwh",
         "arguments": [
           {
             "type": "feed",
@@ -503,7 +503,16 @@
         ]
       },
       {
-        "function": "power_to_kwh",
+        "function": "reset2zero",
+        "arguments": [
+          {
+            "type": "value",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "function": "add_feed",
         "arguments": [
           {
             "type": "feed",
@@ -512,7 +521,7 @@
         ]
       },
       {
-        "function": "log_to_feed",
+        "function": "power_to_kwh",
         "arguments": [
           {
             "type": "feed",
