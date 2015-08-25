@@ -66,15 +66,6 @@
         ]
       },
       {
-        "function": "allownegative",
-        "arguments": [
-          {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
         "function": "subtract_input",
         "arguments": [
           {
@@ -296,20 +287,11 @@
         ]
       },
       {
-        "function": "allownegative",
+        "function": "subtract_input",
         "arguments": [
           {
-            "type": "value",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "function": "sub_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "sPPv"
+            "type": "input",
+            "value": "ppv"
           }
         ]
       },
