@@ -395,16 +395,7 @@
         ]
       },
       {
-        "function": "add_feed",
-        "arguments": [
-          {
-            "type": "feed",
-            "value": "iGridToLoad"
-          }
-        ]
-      },
-      {
-        "function": "scale",
+        "function": "offset",
         "arguments": [
           {
             "type": "value",
@@ -413,11 +404,11 @@
         ]
       },
       {
-        "function": "divide_by_feed",
+        "function": "sub_feed",
         "arguments": [
           {
             "type": "feed",
-            "value": "sPLoad"
+            "value": "iPLoadFromPv"
           }
         ]
       },
