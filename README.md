@@ -58,4 +58,15 @@ Se utilizan las siguientes librerías de terceros:
 * [jQuery 2.1.4](https://jquery.com): consultas asíncronas y manipulación del documento *HTML*
 
 ### Tareas pendientes
-* Verificar/validar datos de inputs, feeds y procesos
+* Generalizar repositorio
+  * Archivo de configuración
+  * Renombrar archivos
+  * Mecanismos genéricos
+  * Traducir todo al inglés
+* Nuevo README.md
+  * Qué es
+  * Instalación/Actualización/Configuración
+  * Dependencias
+  * Librerías externas
+  * Cómo añadir perfiles, inputs, feeds, procesos
+* Liberar proyecto en GitHub
