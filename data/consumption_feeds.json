@@ -1,31 +1,31 @@
 [
   {
     "name": "sILoad",
-    "description": "Intensidad consumo",
+    "description": "Consumption intensity",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "sPLoad",
-    "description": "Potencia consumo",
+    "description": "Consumption power",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "sVoltage",
-    "description": "Voltaje",
+    "description": "Voltage",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "eDLoad",
-    "description": "Consumo diario",
+    "description": "Daily consumption",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
     "name": "tLoad",
-    "description": "Consumo total",
+    "description": "Total consumption",
     "type": "REALTIME",
     "engine": "PHPFINA"
   }

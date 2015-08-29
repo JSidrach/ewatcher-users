@@ -1,133 +1,133 @@
 [
   {
     "name": "sIPv",
-    "description": "Intensidad FV",
+    "description": "PV intensity",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "sPPv",
-    "description": "Potencia FV",
+    "description": "PV power",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "sILoad",
-    "description": "Intensidad consumo",
+    "description": "Consumption intensity",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "sPLoad",
-    "description": "Potencia consumo",
+    "description": "Consumption power",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "sVoltage",
-    "description": "Voltaje",
+    "description": "Voltage",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "iPvToLoad",
-    "description": "Potencia FV a consumo",
+    "description": "PV power consumption",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "iGridToLoad",
-    "description": "Potencia red a consumo",
+    "description": "Grid power consumption",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "iPLoadFromPv",
-    "description": "Porcentaje de consumo con FV actual",
+    "description": "Percentage of consumption with PV power",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
-    "name": "iPLoadFromNet",
-    "description": "Porcentaje de consumo de red actual",
+    "name": "iPLoadFromGrid",
+    "description": "Percentage of consumption with grid power",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
-    "name": "iPvToNet",
-    "description": "Potencia FV a red",
+    "name": "iPvToGrid",
+    "description": "PV power exported to the grid",
     "type": "REALTIME",
     "engine": "PHPFIWA"
   },
   {
     "name": "eDPv",
-    "description": "Energia FV diaria",
+    "description": "Daily PV energy produced",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
-    "name": "eDNet",
-    "description": "Energia diaria de la red",
+    "name": "eDGrid",
+    "description": "Daily energy imported from the grid",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
     "name": "eDLoad",
-    "description": "Consumo diario",
+    "description": "Daily consumption",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
-    "name": "eDPvToNet",
-    "description": "Energia FV a red diaria",
+    "name": "eDPvToGrid",
+    "description": "Daily PV energy exported to the grid",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
     "name": "dPSelf",
-    "description": "Porcentaje de autoconsumo diario",
+    "description": "Percentage of daily self-consumption",
     "type": "DAILY",
     "engine": "PHPFIWA"
   },
   {
     "name": "dPLoadFromPv",
-    "description": "Porcentaje diario de consumo de origen FV",
+    "description": "Percentage of daily consumption with PV origin",
     "type": "DAILY",
     "engine": "PHPFIWA"
   },
   {
     "name": "eDLoadFromPv",
-    "description": "Energia consumo diario de FV",
+    "description": "Daily energy consumption from PV energy",
     "type": "DAILY",
     "engine": "PHPTIMESERIES"
   },
   {
     "name": "tLoad",
-    "description": "Consumo total",
+    "description": "Total consumption",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
     "name": "tPv",
-    "description": "Energia FV generada total",
+    "description": "Total PV energy produced",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
-    "name": "tLoadFromNet",
-    "description": "Energia total importada de la red",
+    "name": "tLoadFromGrid",
+    "description": "Total energy imported from the grid",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
     "name": "tPvToLoad",
-    "description": "Energia FV a consumo total",
+    "description": "Total PV energy consumed",
     "type": "REALTIME",
     "engine": "PHPFINA"
   },
   {
-    "name": "tPvToNet",
-    "description": "Energia FV inyectada a red total",
+    "name": "tPvToGrid",
+    "description": "Total PV energy exported to the grid",
     "type": "REALTIME",
     "engine": "PHPFINA"
   }

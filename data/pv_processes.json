@@ -97,7 +97,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "iPvToNet"
+            "value": "iPvToGrid"
           }
         ]
       },
@@ -106,7 +106,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "eDPvToNet"
+            "value": "eDPvToGrid"
           }
         ]
       },
@@ -133,7 +133,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "eDPvToNet"
+            "value": "eDPvToGrid"
           }
         ]
       },
@@ -417,7 +417,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "iPLoadFromNet"
+            "value": "iPLoadFromGrid"
           }
         ]
       },
@@ -444,7 +444,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "eDNet"
+            "value": "eDGrid"
           }
         ]
       },
@@ -471,7 +471,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "tLoadFromNet"
+            "value": "tLoadFromGrid"
           }
         ]
       },
@@ -534,7 +534,7 @@
         "arguments": [
           {
             "type": "feed",
-            "value": "tPvToNet"
+            "value": "tPvToGrid"
           }
         ]
       }

@@ -1,14 +1,14 @@
 [
   {
     "name": "iload",
-    "description": "Corriente consumo"
+    "description": "Consumption intensity"
   },
   {
     "name": "pload",
-    "description": "Potencia consumo"
+    "description": "Consumption power"
   },
   {
     "name": "voltage",
-    "description": "Voltaje"
+    "description": "Voltage"
   }
 ]

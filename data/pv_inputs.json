@@ -1,22 +1,22 @@
 [
   {
     "name": "ipv",
-    "description": "Intensidad fotovoltaica"
+    "description": "Photovoltaic intensity"
   },
   {
     "name": "ppv",
-    "description": "Potencia fotovoltaica"
+    "description": "Photovoltaic power"
   },
   {
     "name": "iload",
-    "description": "Corriente consumo"
+    "description": "Consumption intensity"
   },
   {
     "name": "pload",
-    "description": "Potencia consumo"
+    "description": "Consumption power"
   },
   {
     "name": "voltage",
-    "description": "Voltaje"
+    "description": "Voltage"
   }
 ]
