@@ -221,7 +221,7 @@ input {
 
 .register-switch-label {
   float: left;
-  width: 50%;
+  width: 100%;
   line-height: 32px;
   color: white;
   text-align: center;

@@ -28,31 +28,31 @@
     $user_data = get_user_data($username, $connection);
     if($user_data === false) {
       $connection->close();
-      return 'El usuario dado no existe';
+      return 'Username provided does not exist';
     }
 
     // Delete feeds
     if(delete_feeds($user_data, $connection) !== true) {
       $connection->close();
-      return 'Error al borrar los feeds';
+      return 'Error while deleting the feeds';
     }
 
     // Delete inputs
     if(delete_inputs($user_data, $connection) !== true) {
       $connection->close();
-      return 'Error al borrar los inputs';
+      return 'Error while deleting the inputs';
     }
 
     // Delete EWatcher panels
     if(delete_ewatcher($user_data, $connection) !== true) {
       $connection->close();
-      return 'Error al borrar la configuración de EWatcher';
+      return 'Error while deleting user configuration (EWatcher)';
     }
 
     // Delete user
     if(delete_user_data($user_data, $connection) !== true) {
       $connection->close();
-      return 'Error al borrar los datos del usuario';
+      return 'Error while deleting user data';
     }
 
     $connection->close();
@@ -70,16 +70,16 @@
   function validate_input($username) {
     // Username
     if((!isset($username)) || (strlen($username) == 0)) {
-      return 'Introduzca un nombre de usuario';
+      return 'Please provide an username';
     }
     if(!ctype_alnum($username)) {
-      return 'El nombre de usuario solo puede contener letras y números';
+      return 'Username must only contain letters and numbers';
     }
     if(strlen($username) < 4) {
-      return 'El nombre de usuario debe tener al menos 4 caracteres';
+      return 'Username must have at least 4 characters';
     }
     if(strlen($username) > 30) {
-      return 'El nombre de usuario no puede tener más de 30 caracteres';
+      return 'User name cannot have more than 30 characters';
     }
 
     return true;

@@ -10,7 +10,7 @@
   //   $username: username
   //   $email: email of the user
   //   $password: password of the user
-  //   $panelType: type of the panel ("PV" or "Consumption")
+  //   $panelType: type of the panel
   //
   // Returns
   //   true: user, feeds and inputs successfully created
@@ -45,36 +45,28 @@
     // Create user
     if(create_user($username, $email, $password, $userid, $apikey, $connection) !== true) {
       end_connection(true, $connection);
-      return 'El nombre de usuario ya existe';
+      return 'Username already exists';
     }
 
-    // Set the type of user data
-    $prefix = 'data/';
-    // PV
-    if($panelType == 'PV') {
-      $prefix .= 'pv';
-    }
-    // Consumption
-    else {
-      $prefix .= 'consumption';
-    }
+    // Set the type of user profile
+    $prefix = 'data/' . $panelType;
 
     // Create feeds
     if(create_feeds($prefix . '_feeds.json', $feeds, $apikey) !== true) {
       end_connection(true, $connection);
-      return 'Fallo al crear los feeds';
+      return 'Error while creating the feeds';
     }
 
     // Create inputs
     if(create_inputs($prefix . '_inputs.json', $userid, $inputs, $connection, $redis) !== true) {
       end_connection(true, $connection);
-      return 'Fallo al crear los inputs';
+      return 'Error while creating the inputs';
     }
 
     // Create processes
     if(create_processes($prefix . '_processes.json', $feeds, $inputs, $apikey) !== true) {
       end_connection(true, $connection);
-      return 'Fallo al crear los procesos';
+      return 'Error while creating the processes';
     }
 
     end_connection(false, $connection);
@@ -132,45 +124,48 @@
   //   true: parameters valid
   //   *anything else*: error string
   function validate_input($username, $email, $password, $panelType) {
+    // Global variables
+    global $user_profiles;
+
     // Username
     if((!isset($username)) || (strlen($username) == 0)) {
-      return 'Introduzca un nombre de usuario';
+      return 'Please provide an username';
     }
     if(!ctype_alnum($username)) {
-      return 'El nombre de usuario solo puede contener letras y números';
+      return 'Username must contain only letters and numbers';
     }
     if(strlen($username) < 4) {
-      return 'El nombre de usuario debe tener al menos 4 caracteres';
+      return 'Username must have at least 4 characters';
     }
     if(strlen($username) > 30) {
-      return 'El nombre de usuario no puede tener más de 30 caracteres';
+      return 'Username cannot have more than 30 characters';
     }
 
     // Email
     if((!isset($email)) || (strlen($email) == 0)) {
-      return 'Introduzca un email';
+      return 'Please provide an email';
     }
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      return 'Email no válido';
+      return 'Please provide a valid email';
     }
 
     // Password
     if((!isset($password)) || (strlen($password) == 0)) {
-      return 'Introduzca una contraseña';
+      return 'Please provide a password';
     }
     if(strlen($password) < 4) {
-      return 'La contraseña debe tener al menos 4 caracteres';
+      return 'Password must have at least 4 characters';
     }
     if(strlen($password) > 30) {
-      return 'La contraseña no puede tener más de 30 caracteres';
+      return 'Password cannot have more than 30 characters';
     }
 
     // Panel Type
     if((!isset($panelType)) || (strlen($panelType) == 0)) {
-      return 'Seleccione un tipo de instalación';
+      return 'Select a type of profile';
     }
-    if(!($panelType === 'PV' || $panelType === 'Consumption')) {
-      return 'Seleccione un tipo válido de instalación';
+    if(!isset($user_profiles[$panelType])) {
+      return 'Please select a valid profile';
     }
     return true;
   }

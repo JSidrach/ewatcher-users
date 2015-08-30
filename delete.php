@@ -8,29 +8,30 @@
   // Form submitted
   else {
     // Delete user, feeds and inputs
-    require_once('borrado_query.php');
+    require_once('delete_query.php');
     $result = delete_user($_REQUEST['username']);
   }
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Borrado de Usuarios - ISM Solar</title>
+    <title>User Deletion - EWatcher Users</title>
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="lib/style_search.css">    <link rel="stylesheet" type="text/css" href="lib/sweetalert.css">
+    <link rel="stylesheet" href="lib/style_search.css">
+    <link rel="stylesheet" type="text/css" href="lib/sweetalert.css">
     <script src="lib/sweetalert.min.js"></script>
     <script src="lib/jquery-2.1.4.min.js"></script>
   </head>
   <body>
-          <form class="sign-up" action="#" method="post">
-        <h1 class="sign-up-title">Borrado de Usuarios</h1>
-        <input type="text" class="sign-up-input" name="username" placeholder="Nombre del Usuario" autofocus>
-        <input type="submit" name="submitForm" value="Buscar Usuario" class="sign-up-button">
-      </form>
-        <div class="about">
+    <form class="sign-up" action="#" method="post">
+      <h1 class="sign-up-title">User Deletion</h1>
+      <input type="text" class="sign-up-input" name="username" placeholder="Username" autofocus>
+      <input type="submit" name="submitForm" value="Search User" class="sign-up-button">
+    </form>
+    <div class="about">
       <p class="about-author">
-        <a href="index.php">Creación de Usuarios</a> | <a href="paneles.php">Asignación de Paneles</a>
+        <a href="index.php">User Creation</a> | <a href="panels.php">Panel Assignment</a>
       </p>
     </div>
     <script>
@@ -38,10 +39,10 @@
         if($result === true) {
           ?>
             swal({
-              title: "Éxito",
-              text: "Usuario, inputs y feeds borrados satisfactoriamente",
+              title: "Success",
+              text: "User, inputs and feeds successfully deleted",
               type: "success",
-              confirmButtonText: "Continuar"
+              confirmButtonText: "Continue"
             });
           <?php
           echo '';
@@ -53,7 +54,7 @@
               title: "Error",
               text: <?php echo '"' . $result . '"' ?>,
               type: "error",
-              confirmButtonText: "Continuar"
+              confirmButtonText: "Continue"
             });
           <?php
         }

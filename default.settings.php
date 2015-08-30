@@ -17,6 +17,12 @@
   $redis_enabled = false;
   $redis_server = "127.0.0.1";
 
+  // User profiles
+  $user_profiles = array(
+    "pv" => "PV",
+    "consumption" => "Consumption"
+  );
+
   // eWatcher table schema
   $schema['ewatcher'] = array(
     "userid" => array("type" => "int(11)", "Null" => "NO"),

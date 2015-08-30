@@ -69,4 +69,7 @@ Se utilizan las siguientes librerías de terceros:
   * Dependencias
   * Librerías externas
   * Cómo añadir perfiles, inputs, feeds, procesos
+  * Limitaciones:
+    * Caracteres no ansi feeds/inputs
+    * No support virtual feeds, schedules
 * Liberar proyecto en GitHub

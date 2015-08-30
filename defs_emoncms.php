@@ -1,4 +1,4 @@
-<?php
+ <?php
   //
   // Auxiliary definition functions. Modify in case emoncms definitions change
   //
@@ -6,14 +6,16 @@
   // Gets the type of feed
   //
   // Parameters:
-  //   $type: string with the type of feed ('REALTIME' or 'DAILY')
+  //   $type: string with the type of feed ('UNDEFINED', 'REALTIME', 'DAILY' or 'HISTOGRAM')
   //
   // Returns
   //   id of the feed's type (number)
   function get_type_id($type) {
     // Definitions
+    $types['UNDEFINED'] = 0;
     $types['REALTIME'] = 1;
     $types['DAILY'] = 2;
+    $types['HISTOGRAM'] = 3;
 
     // Query
     return $types[$type];
@@ -22,15 +24,23 @@
   // Gets the type of feed
   //
   // Parameters:
-  //   $type: string with the type of engine ('PHPTIMESERIES', 'PHPFINE' or 'PHPFIWA')
+  //   $type: string with the type of engine ('PHPTIMESERIES', 'PHPFINE', 'PHPFIWA', etc.)
   //
   // Returns
   //   id of the engine (number)
   function get_engine_id($engine) {
     // Definitions
+    $engines['MYSQL'] = 0;
+    $engines['TIMESTORE'] = 1;       // Deprecated
     $engines['PHPTIMESERIES'] = 2;
+    $engines['GRAPHITE'] = 3;        // Not included in core
+    $engines['PHPTIMESTORE'] = 4;    // Deprecated
     $engines['PHPFINA'] = 5;
     $engines['PHPFIWA'] = 6;
+    // Virtual feeds not supported (may add them in the future)
+    //$engines['VIRTUALFEED'] = 7;   // Virtual feed, on demand post processing
+    $engines['MYSQLMEMORY'] = 8;     // Mysql with MEMORY tables on RAM. All data is lost on shutdown
+    $engines['REDISBUFFER'] = 9;     // Redis Read/Write buffer, for low write mode
 
     // Query
     return $engines[$engine];
@@ -82,10 +92,11 @@
     $functions['publish_to_mqtt'] = 35;
     $functions['reset_to_NULL'] = 36;
     $functions['reset_to_original'] = 37;
-    $functions['if_!schedule,_zero'] = 38;
-    $functions['if_!schedule,_NULL'] = 39;
-    $functions['if_schedule,_zero'] = 40;
-    $functions['if_schedule,_NULL'] = 41;
+    // Schedule functions not supported (may add them in the future)
+    //$functions['if_!schedule,_zero'] = 38;
+    //$functions['if_!schedule,_NULL'] = 39;
+    //$functions['if_schedule,_zero'] = 40;
+    //$functions['if_schedule,_NULL'] = 41;
     $functions['if_zero,_skip_next'] = 42;
     $functions['if_!zero,_skip_next'] = 43;
     $functions['if_NULL,_skip_next'] = 44;
@@ -97,7 +108,8 @@
     $functions['if_=,_skip_next'] = 50;
     $functions['if_!=,_skip_next'] = 51;
     $functions['GOTO'] = 52;
-    $functions['source_feed'] = 53;
+    // Virtual feeds not supported (may add them in the future)
+    $functions['source_feed_data_time'] = 53;
 
     // Query
     return $functions[$function];

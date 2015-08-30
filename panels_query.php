@@ -6,19 +6,19 @@
   if(isset($_REQUEST['togglePanel'])) {
     // Check valid username
     if((!isset($_REQUEST['user'])) || (strlen($_REQUEST['user']) < 4) || (strlen($_REQUEST['user']) > 30) || (!ctype_alnum($_REQUEST['user']))) {
-      echo 'Formato de usuario inválido';
+      echo 'Uername not valid';
       http_response_code(400);
       exit;
     }
     // Check valid panel
     if(($_REQUEST['togglePanel'] !== 'P1') &&  ($_REQUEST['togglePanel'] !== 'P2') && ($_REQUEST['togglePanel'] !== 'P3') && ($_REQUEST['togglePanel'] !== 'P4') && ($_REQUEST['togglePanel'] !== 'P5')) {
-      echo 'Nombre de panel inválido';
+      echo 'Panel name not valid';
       http_response_code(400);
       exit;
     }
     // Check valid set to
     if((!isset($_REQUEST['set'])) || (($_REQUEST['set'] !== '0') && ($_REQUEST['set'] !== '1'))) {
-      echo 'Asignación a panel inválida';
+      echo 'Bad panel assignment';
       http_response_code(400);
       exit;
     }
@@ -26,7 +26,7 @@
     // Connect to the database
     $connection = new mysqli($db_server, $db_username, $db_password, $db_name);
     if($connection->connect_error) {
-      echo 'Error al conectar con la base de datos';
+      echo 'Error connecting to the database';
       http_response_code(400);
       exit;
     }
@@ -35,7 +35,7 @@
     $result = $connection->query("SELECT id FROM users WHERE username='" . $_REQUEST['user'] . "';");
     if(($result === FALSE) || (empty($result))) {
       $connection->close();
-      echo 'Usuario no existente';
+      echo 'Username does not exist';
       http_response_code(400);
       exit;
     }
@@ -44,7 +44,7 @@
     // Toggle panel
     if($connection->query("UPDATE ewatcher SET " . $_REQUEST['togglePanel'] . "=" . $_REQUEST['set'] . " WHERE userid=$userid;") === FALSE) {
       $connection->close();
-      echo 'Error al actualizar la configuración del panel';
+      echo 'Error while updating EWatcher panel configuration';
       http_response_code(400);
       exit;
     }
@@ -70,26 +70,26 @@
 
     // Check valid username
     if((!isset($username)) || (strlen($username) < 4) || (strlen($username) > 30) || (!ctype_alnum($username))) {
-      return 'Formato de usuario inválido';
+      return 'Username not valid';
     }
 
     // Create connection
     $connection = new mysqli($db_server, $db_username, $db_password, $db_name);
     if($connection->connect_error) {
-      return 'Error al conectar con la base de datos';
+      return 'Error while connecting to the database';
     }
 
     // Create table if it does not exist
     if(check_table($connection, 'ewatcher', $schema['ewatcher']) === false) {
       $connection->close();
-      return 'Error al crear la tabla por primera vez';
+      return 'Error while creating the EWatcher configuration table';
     }
 
     // Check if user exists in the users table, get userid
     $result = $connection->query("SELECT id FROM users WHERE username='$username';");
     if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       $connection->close();
-      return 'Usuario no existente';
+      return 'Username does not exist';
     }
     $userid = $result->fetch_object()->id;
 
@@ -99,7 +99,7 @@
       // Create ewatcher user config if it does not exist
       if($connection->query("INSERT INTO ewatcher (userid) VALUES ($userid);") === FALSE) {
         $connection->close();
-        return 'Error al crear la configuración del usuario';
+        return 'Error while creating user configuration (EWatcher)';
       }
     }
 

@@ -1,6 +1,10 @@
 <?php
   error_reporting(E_ALL);
   ini_set("display_errors", 1);
+
+  // Settings
+  require_once('settings.php');
+
   // Form not submitted yet
   if (!isset($_REQUEST['submitForm'])){
     $result = false;
@@ -17,48 +21,45 @@
   }
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Creación de Usuarios - ISM Solar</title>
+    <title>User Creation - EWatcher Users</title>
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="lib/style_index.css">
     <link rel="stylesheet" type="text/css" href="lib/sweetalert.css">
     <script src="lib/sweetalert.min.js"></script>
   </head>
 <body>
-  <h1 class="register-title">Introduzca los datos</h1>
+  <h1 class="register-title">Fill the data</h1>
   <form class="register" action="#" method="post">
-    <div class="register-switch">
-      <input type="radio" name="panelType" value="PV" id="P1" class="register-switch-input"
+    <div class="register-switch" style="height: <?php echo strval(32*sizeof($user_profiles)) . "px"; ?>;">
       <?php
-        if(isset($_REQUEST['panelType'])) {
-          if($_REQUEST['panelType'] === 'PV') {
-            echo 'checked';
+        $i = 0;
+        foreach($user_profiles as $key => $value) {
+          echo "<input type='radio' name='panelType' value='$key' id='$key' class='register-switch-input'";
+          if(isset($_REQUEST['panelType'])) {
+            if($_REQUEST['panelType'] === $key) {
+              echo 'checked';
+            }
+          } else {
+            if($i == 0) {
+              echo 'checked';
+            }
           }
-        } else {
-          echo 'checked';
+          $i++;
+          echo "><label for='$key' class='register-switch-label'>$value</label>";
         }
       ?>
-      >
-      <label for="P1" title="Autoconsumo Fotovoltaico" class="register-switch-label">FV</label>
-      <input type="radio" name="panelType" value="Consumption" id="P2" class="register-switch-input"
-      <?php
-        if(isset($_REQUEST['panelType']) && $_REQUEST['panelType'] === 'Consumption') {
-          echo 'checked';
-        }
-      ?>
-      >
-      <label for="P2" title="Consumo Eléctrico" class="register-switch-label">Consumo</label>
     </div>
-    <input type="username" name="username" class="register-input" placeholder="Nombre del usuario" <?php if(isset($_REQUEST['username'])) echo 'value="' . $_REQUEST['username']. '"'; ?>>
-    <input type="email" name="email" class="register-input" placeholder="Dirección de correo electrónico" <?php if(isset($_REQUEST['email'])) echo 'value="' . $_REQUEST['email']. '"'; ?>>
-    <input type="password" name="password" class="register-input" placeholder="Contraseña">
-    <input type="submit" name="submitForm" value="Crear Cuenta" class="register-button">
+    <input type="username" name="username" class="register-input" placeholder="User Name" <?php if(isset($_REQUEST['username'])) echo 'value="' . $_REQUEST['username']. '"'; ?>>
+    <input type="email" name="email" class="register-input" placeholder="E-Mail" <?php if(isset($_REQUEST['email'])) echo 'value="' . $_REQUEST['email']. '"'; ?>>
+    <input type="password" name="password" class="register-input" placeholder="Password">
+    <input type="submit" name="submitForm" value="Create Account" class="register-button">
   </form>
   <div class="about">
     <p class="about-author">
-      <a href="paneles.php">Asignación de Paneles</a>  | <a href="borrado.php">Borrado de Usuarios</a>
+      <a href="panels.php">Panel Assignment</a>  | <a href="delete.php">User Deletion</a>
     </p>
   </div>
   <script>
@@ -66,10 +67,10 @@
       if($result === true) {
         ?>
           swal({
-            title: "Éxito",
-            text: "Usuario, inputs y feeds creados satisfactoriamente",
+            title: "Success",
+            text: "User, inputs and feeds successfully created",
             type: "success",
-            confirmButtonText: "Continuar"
+            confirmButtonText: "Continue"
           });
         <?php
         echo '';
@@ -81,7 +82,7 @@
             title: "Error",
             text: <?php echo '"' . $result . '"' ?>,
             type: "error",
-            confirmButtonText: "Continuar"
+            confirmButtonText: "Continue"
           });
         <?php
       }
