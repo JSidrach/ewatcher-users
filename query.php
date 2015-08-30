@@ -194,16 +194,16 @@
 
     // Rest of the parameters
     $hash = hash('sha256', $password);
-    $string = md5(uniqid(mt_rand(), true));
-    $salt = substr($string, 0, 3);
-    $hash = hash('sha256', $salt . $hash);
+    $salt = md5(uniqid(mt_rand(), true));
+    $password = hash('sha256', $salt . $hash);
+
     $apikey_write = md5(uniqid(mt_rand(), true));
     $apikey_read = md5(uniqid(mt_rand(), true));
     $apikey = $apikey_write;
 
     // Query
     $sqlQuery = "INSERT INTO users (username, password, email, salt ,apikey_read, apikey_write, admin, timezone, language)
-                 VALUES ('$username', '$hash', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$user_zone', '$user_lang');";
+                 VALUES ('$username', '$password', '$email', '$salt', '$apikey_read', '$apikey_write', 0, '$user_zone', '$user_lang');";
     if ($connection->query($sqlQuery) === FALSE) {
       return false;
     }
