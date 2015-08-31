@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Password Protected Area"
-AuthUserFile /var/www/html/gestion-usuarios/.htpasswd
+AuthUserFile /var/www/html/ewatcher-users/.htpasswd
 Require valid-user
 
 RedirectMatch 404 /\.git
