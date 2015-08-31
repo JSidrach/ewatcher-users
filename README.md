@@ -1,19 +1,21 @@
-EWatcher Users
---------------
+# EWatcher Users
 
-Sistema para crear/borrar usuarios de la plataforma *emoncms*, y asignarles paneles dentro de alguno de los perfiles disponibles (Autoconsumo FV o Consumo Eléctrico)
+Create users of the platform *emoncms* with predefined inputs and feeds.
+Two datasets are included, `pv` and `consumption`, useful for the [EWatcher](https://github.com/jsidrach/ewatcher) module.
 
-### Instalación y Configuración
-* **NOTA**: es necesario haber instalado *emoncms* previamente, versión 9 en adelante
-* Situarse en la carpeta de *Apache* (`/var/www/html/`)
-* Clonar el repositorio mediante `git clone https://USUARIO@bitbucket.org/ismsolar/gestion-usuarios.git`, sustituyendo `USUARIO` por tu nombre de usuario
-* Situarse en la carpeta del proyecto (`/var/www/html/gestion-usuarios/`)
-* Copiar el archivo `default.settings.php` a `settings.php` (`cp default.settings.php settings.php`)
-* Editar el archivo `settings.php` estableciendo los parámetros de conexión a la base de datos
-* Copiar el archivo `default.htpasswd` a `.htpasswd` (`cp default.htpasswd .htpasswd`)
-* Las credenciales por defecto para acceder a la página son `admin/admin`
-* Para cambiar la contraseña de acceso, editar el archivo `.htpasswd` reemplazando la línea por una generada, por ejemplo, [aquí](http://www.htaccesstools.com/htpasswd-generator/)
-* Editar el archivo `/etc/apache2/apache2.conf`, quedando la parte del directorio web así:
+Install & Configure
+-------------------
+* **Note**: it is necessary to have *emoncms* installed (>= v9)
+* Change path to the *Apache* folder (usually `/var/www/html/`)
+* Clone the repository via `git clone https://github.com/jsidrach/ewatcher-users/`
+* Change path to the cloned repository folder
+* Copy `default.settings.php` to `settings.php` (`cp default.settings.php settings.php`)
+* Edit `settings.php` and set the database parameters
+* Copy `default.htpasswd` to `.htpasswd`
+* Edit `.htpasswd`, replacing the line with a new generated password (the default is `admin/admin`), using a tool like [this one](http://www.htaccesstools.com/htpasswd-generator/)
+* Copy `default.htaccess` to `.htaccess`
+* Edit `.htaccess`, if needed, setting the `.htpasswd` path
+* Edit `/etc/apache2/apache2.conf`, leaving the web folder directory like:
 
 ~~~~
 <Directory /var/www/html>
@@ -23,22 +25,20 @@ Sistema para crear/borrar usuarios de la plataforma *emoncms*, y asignarles pane
 </Directory>
 ~~~~
 
-* Reiniciar *Apache* ejecutando `sudo apachectl restart`
+* Restart *Apache* via `sudo apachectl restart`
+* Ready to go! Access with your browser to `YOUR_SERVER_IP/ewatcher-users`
 
-### Utilización
-Abrir en el navegador la dirección del servidor en el que se ha instalado el proyecto seguida de `/creacion-usuarios/`
+How to add more user profiles
+-----------------------------
+Each user profile contains three definition files:
 
-### Actualización
-* Situarse en la carpeta `/var/www/html/creacion-usuarios/` y ejecutar `git pull`
-* Descartar los cambios locales en caso de haber discrepancias
+* `<profileId>_feeds.json`
+* `<profileId>_inputs.json`
+* `<profileId>_processes.json`
 
-Install & Configure
--------------------
-TODO
-
-How to add more profiles
-------------------------
-TODO
+These files are stored in the `data/` folder.
+A *JSON* schema for each type of file if provided in the `data/` folder too.
+After adding the three files to the `data/` folder, edit `settings.php` adding a new element to the `$user_profiles` variable (`"<profileId>" => "Short description"`)
 
 Update
 ------
@@ -107,10 +107,3 @@ The following libraries are used:
 * [Sign Up Form](http://www.cssflow.com/snippets/sign-up-form): style of the search user form
 * [Settings Panel](http://www.cssflow.com/snippets/settings-panel): style of the panel assignment page
 * [jQuery 2.1.4](https://jquery.com): ajax requests and DOM manipulation
-
-### Tareas pendientes
-* Nuevo README.md
-  * Qué es
-  * Instalación/Configuración
-  * Cómo añadir perfiles, inputs, feeds, procesos
-* Liberar proyecto en GitHub
