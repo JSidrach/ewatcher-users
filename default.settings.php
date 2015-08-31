@@ -5,7 +5,7 @@
   $db_username = "DB_USERNAME";
   $db_password = "DB_PASSWORD";
 
-  // System settings
+  // Emoncms settings
   $user_zone   = "Europe/Madrid";
   $user_lang   = "es_ES";
   $user_node   = 7;
@@ -17,7 +17,7 @@
   $redis_enabled = false;
   $redis_server = "127.0.0.1";
 
-  // User profiles
+  // User profiles (for each key, the following files must exist: data/key_inputs.json, data/key_feeds.json, data/key_processes.json)
   $user_profiles = array(
     "pv" => "PV",
     "consumption" => "Consumption"
