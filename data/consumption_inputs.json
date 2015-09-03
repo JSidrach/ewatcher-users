@@ -9,6 +9,7 @@
   },
   {
     "name": "voltage",
-    "description": "Voltage"
+    "description": "Voltage",
+    "node": "7"
   }
 ]

@@ -270,9 +270,16 @@
 
     // Create each input
     foreach($inputArray as $input) {
+      // Input node
+      if(property_exists($input, "node")) {
+        $inputNode = $input->node;
+      } else {
+        $inputNode = $user_node;
+      }
+
       // Query
       $sqlQuery = "INSERT INTO input (userid, name, description, nodeid)
-                   VALUES ($userid, '$input->name', '$input->description', $user_node);";
+                   VALUES ($userid, '$input->name', '$input->description', $inputNode);";
       if ($connection->query($sqlQuery) === FALSE) {
         return false;
       }
@@ -283,7 +290,7 @@
       // Redis query
       if($redis !== false) {
         $redis->sAdd("user:inputs:$userid", $inputId);
-        $redis->hMSet("input:$inputId",array('id'=>$inputId,'nodeid'=>$user_node,'name'=>$input->name,'description'=>$input->description, 'processList'=>""));
+        $redis->hMSet("input:$inputId",array('id'=>$inputId,'nodeid'=>$inputNode,'name'=>$input->name,'description'=>$input->description, 'processList'=>""));
       }
     }
 
