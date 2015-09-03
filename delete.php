@@ -27,7 +27,7 @@
     <form class="sign-up" action="#" method="post">
       <h1 class="sign-up-title">User Deletion</h1>
       <input type="text" class="sign-up-input" name="username" placeholder="Username" autofocus>
-      <input type="submit" name="submitForm" value="Search User" class="sign-up-button">
+      <input type="submit" name="submitForm" value="Delete User" class="sign-up-button">
     </form>
     <div class="about">
       <p class="about-author">
