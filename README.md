@@ -72,8 +72,7 @@ As of now, this project have the following limitations:
 
 * Lack of support for virtual feeds
 * Lack support for schedule functions
-* No spaces in a feed name
-* No special characters in names or descriptions of the inputs/feeds
+* No spaces in a feed/input name
 
 Screenshots
 -----------
