@@ -101,6 +101,10 @@
     if($connection->connect_error) {
       return false;
     }
+
+    // Set charset to utf8
+    $connection->set_charset("utf8");
+
     return true;
   }
 

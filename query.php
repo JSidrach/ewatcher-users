@@ -89,6 +89,10 @@
     if($connection->connect_error) {
       return false;
     }
+
+    // Set charset to utf8
+    $connection->set_charset("utf8");
+
     // Disable autocommit (begin transaction)
     $connection->autocommit(FALSE);
     return true;

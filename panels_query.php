@@ -31,6 +31,9 @@
       exit;
     }
 
+    // Set charset to utf8
+    $connection->set_charset("utf8");
+
     // Get the userid
     $result = $connection->query("SELECT id FROM users WHERE username='" . $_REQUEST['user'] . "';");
     if(($result === FALSE) || (empty($result))) {
@@ -79,6 +82,9 @@
       return 'Error while connecting to the database';
     }
 
+    // Set charset to utf8
+    $connection->set_charset("utf8");
+
     // Create table if it does not exist
     if(check_table($connection, 'ewatcher', $schema['ewatcher']) === false) {
       $connection->close();
@@ -125,6 +131,9 @@
       return false;
     }
 
+    // Set charset to utf8
+    $connection->set_charset("utf8");
+
     // Get panel values
     $result = $connection->query("SELECT id FROM users WHERE username='$username';");
     if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
@@ -158,7 +167,6 @@
   //   false: error
   //   true: success
   function check_table($connection, $table, $schema) {
-    $connection->set_charset("utf8");
     $result = $connection->query("SHOW TABLES LIKE '$table';");
     if(($result === FALSE) || (empty($result)) || ($result->num_rows == 0)) {
       // Create table
