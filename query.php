@@ -230,7 +230,7 @@
   //   false: error creating the feeds
   function create_feeds($datafile, &$feeds, $apikey) {
     // Global variables
-    global $base_url;
+    global $base_url, $user_interval;
 
     // Read the feeds from file
     $feedArray = json_decode(file_get_contents($datafile));
