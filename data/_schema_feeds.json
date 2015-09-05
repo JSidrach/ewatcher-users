@@ -23,6 +23,9 @@
           "PHPFINA",
           "PHPTIMESERIES"
         ]
+      },
+      "interval": {
+        "type": "string"
       }
     },
     "additionalProperties": false,

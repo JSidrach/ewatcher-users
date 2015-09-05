@@ -237,10 +237,17 @@
 
     // Create each feed
     foreach($feedArray as $feed) {
+      // Feed interval
+      if(property_exists($feed, "interval")) {
+        $feedInterval = $feed->interval;
+      } else {
+        $feedInterval = $user_interval;
+      }
+
       // Query
       $datatype = get_type_id($feed->type);
       $engine = get_engine_id($feed->engine);
-      $url = str_replace(' ', '%20', $base_url . "/feed/create.json?tag=$feed->description&name=$feed->name&datatype=$datatype&engine=$engine&apikey=$apikey&options={\"interval\":10}");
+      $url = str_replace(' ', '%20', $base_url . "/feed/create.json?tag=$feed->description&name=$feed->name&datatype=$datatype&engine=$engine&apikey=$apikey&options={\"interval\":$feedInterval}");
       $result = json_decode(file_get_contents($url), true);
       if($result["success"] !== true) {
         return false;

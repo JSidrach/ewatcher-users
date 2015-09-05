@@ -9,6 +9,8 @@
   $user_zone   = "Europe/Madrid";
   $user_lang   = "es_ES";
   $user_node   = 7;
+  // Feed default interval (in seconds)
+  $user_interval = 10;
 
   // Base url
   $base_url    = "http://localhost/emoncms/";
