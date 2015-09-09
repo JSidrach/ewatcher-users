@@ -365,7 +365,20 @@
       $processes = implode(",", $processesStrings);
 
       // Query
-      $result = file_get_contents("$base_url/input/process/set.json?inputid=$inputId&processlist=$processes&apikey=$apikey");
+      $postdata = http_build_query(
+        array(
+          'processlist' => "$processes"
+        )
+      );
+      $opts = array('http' =>
+        array(
+          'method'  => 'POST',
+          'header'  => 'Content-type: application/x-www-form-urlencoded',
+          'content' => $postdata
+        )
+      );
+      $context  = stream_context_create($opts);
+      $result = file_get_contents("$base_url/input/process/set.json?inputid=$inputId&apikey=$apikey", false, $context);
       if(($result == "false") || ($result === FALSE)) {
         return false;
       }

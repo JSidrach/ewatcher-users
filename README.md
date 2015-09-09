@@ -1,7 +1,9 @@
 # EWatcher Users
 
-Create users of the platform *emoncms* with predefined inputs and feeds.
+Create users of the platform [emoncms](https://github.com/emoncms/emoncms/) with predefined inputs and feeds.
 Two datasets are included, `pv` and `consumption`, useful for the [EWatcher](https://github.com/jsidrach/ewatcher) module.
+
+*Emocms* compatibility (last checked, could be higher): `EmonCMS 9 RC2 | 2015.09.09`
 
 Install & Configure
 -------------------
