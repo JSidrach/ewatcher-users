@@ -1,4 +1,4 @@
-# EWatcher Users
+# EWatcher Users [Archived]
 
 Create users of the platform [emoncms](https://github.com/emoncms/emoncms/) with predefined inputs and feeds.
 Two datasets are included, `pv` and `consumption`, useful for the [EWatcher](https://github.com/jsidrach/ewatcher) module.
